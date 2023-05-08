@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { useAuthStore } from "@/store/auth.store";
 import { onMounted } from "vue";
+import NavigationBar from "@/components/NavigationBar.vue";
 
 const authStore = useAuthStore();
 
@@ -13,9 +14,8 @@ onMounted(() => {
 
 <template>
   <v-app>
+    <NavigationBar v-if="authStore.userIsLoggedIn"/>
     <v-main>
-      <router-link to="/login">Go to login</router-link>
-      <router-link to="/home">Go to Home</router-link>
       <router-view></router-view>
     </v-main>
   </v-app>

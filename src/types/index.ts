@@ -54,3 +54,34 @@ export interface LoginResponse {
   message: string | null;
   data: User;
 }
+
+export interface Booking {
+  id: number;
+  is_subscription: number;
+  is_subscription_active: number;
+  berth_id: number;
+  berth_id_2: number | null;
+  ship_id: number;
+  user_id: number;
+  worker_id: string | null;
+  port_id: number;
+  date_ini: string;
+  date_end: string;
+  arrived_at: string | null;
+  departured_at: string | null;
+  created_at: string;
+  updated_at: string | null;
+  deleted_at: string | null;
+}
+
+export interface GetBookingsResponse {
+  error: boolean;
+  errors: APIError[];
+  code: number;
+  status: number;
+  message: string | null;
+  data: Booking[];
+  next: null;
+  prev: null;
+  items: number;
+}

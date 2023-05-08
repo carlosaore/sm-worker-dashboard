@@ -43,6 +43,7 @@ export const useAuthStore = defineStore({
         this.user = JSON.parse(localStorage.getItem("user") as string);
         this.userIsLoggedIn = true;
         authenticatedApi.defaults.headers.common["Authorization"] = `Bearer ${this.user.access_token}`;
+        await router.push("/home");
       } else {
         await this.logout();
       }

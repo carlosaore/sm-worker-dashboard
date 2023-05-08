@@ -22,7 +22,7 @@ export const unauthenticatedApi = axios.create({
 export const authenticatedApi = axios.create({
   baseURL,
   headers: userInLocalStorage
-    // type assertion to tell TS that localStorage.getItem("user") is not null since we checked for it above (userInLocalStorage)
-    ? { Authorization: `Bearer ${JSON.parse(localStorage.getItem("user") as string).access_token}` }
+    ? // type assertion to tell TS that localStorage.getItem("user") is not null since we checked for it above (userInLocalStorage)
+      { Authorization: `Bearer ${JSON.parse(localStorage.getItem("user") as string).access_token}` }
     : {},
 });
