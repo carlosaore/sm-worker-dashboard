@@ -5,7 +5,7 @@ import HelloWorld from "@/components/HelloWorld.vue";
 <template>
   <HelloWorld>
     <template #default>
-      <h1>Home</h1>
+      <h1>Reset password</h1>
     </template>
   </HelloWorld>
 </template>
