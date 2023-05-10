@@ -57,8 +57,8 @@ export interface LoginResponse {
 
 export interface Booking {
   id: number;
-  is_subscription: number;
-  is_subscription_active: number;
+  is_subscription: number; // 0 or 1
+  is_subscription_active: number; // 0 or 1
   berth_id: number;
   berth_id_2: number | null;
   ship_id: number;
@@ -84,4 +84,31 @@ export interface GetBookingsResponse {
   next: null;
   prev: null;
   items: number;
+}
+
+/**
+ * Query params for getBookings function in services/getBookings.ts
+ * May also be used for a filter component in the UI but not for the actual request
+ */
+export interface GetBookingsQueryParams {
+  type?: 'arrivals' | 'departures';
+  page?: number;
+  limit?: number;
+  sort_by?: 'date_ini' | 'date_end' | 'created_at' | 'updated_at' | 'deleted_at';
+  sort_order?: 'asc' | 'desc';
+}
+
+/**
+ * This is the real interface for the params that will actually be sent to the API as query params
+ * Yes, you read that right, the GetBookingsQueryParams type is only to get the correct params for the getBookings function
+ * It's a bit different because we need to calculate stuff depending on stuff, and we like the interface design pattern: No logic in the interface, only in the implementation...
+ * (Trust me, I watched the tiktoks, and ate the crayons, I know what I'm doing)
+ */
+export type RealGetBookingsQueryParams = {
+  page: string;
+  date_ini?: string;
+  date_end?: string;
+  limit?: string;
+  sort_by?: 'date_ini' | 'date_end' | 'created_at' | 'updated_at' | 'deleted_at';
+  sort_order?: 'asc' | 'desc';
 }

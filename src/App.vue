@@ -2,6 +2,7 @@
 import { useAuthStore } from "@/store/auth.store";
 import { onMounted } from "vue";
 import NavigationBar from "@/components/NavigationBar.vue";
+import Footer from "@/components/Footer.vue";
 
 const authStore = useAuthStore();
 
@@ -18,5 +19,6 @@ onMounted(() => {
     <v-main>
       <router-view></router-view>
     </v-main>
+    <Footer v-if="authStore.userIsLoggedIn"/>
   </v-app>
 </template>
