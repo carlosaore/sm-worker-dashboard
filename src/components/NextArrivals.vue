@@ -34,7 +34,7 @@ const {
 
 <template>
   <v-card
-    title="Próximas 5 reservas"
+    title="Próximas reservas"
     :loading="isLoading"
     :subtitle="`Hora de la última actualización: ${updatedAt}`"
     prepend-icon="mdi-import"

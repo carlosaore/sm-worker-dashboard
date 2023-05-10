@@ -51,7 +51,7 @@ const headers: Headers = [
     ref: "ship_id",
   },
   {
-    text: "Cliente?",
+    text: "Navegante?",
     icon: "mdi-account-tie-hat",
     ref: ["user_id", "is_subscription", "is_subscription_active"], // We will add a badge or something to signal sub status
   },

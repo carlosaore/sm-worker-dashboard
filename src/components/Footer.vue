@@ -13,10 +13,10 @@ const userString = computed(() => {
 </script>
 
 <template>
-  <v-footer class="bg-grey">
+  <v-footer class="bg-grey" id="footer">
     <v-responsive class="pa-3">
       <v-row align="center" justify="center">
-        <v-col cols="12" md="6" class="text-center pa-0">
+        <v-col class="text-center pa-0">
           <span class="text-caption text-white">
             Logueado como: {{ userString }}
           </span>
@@ -25,3 +25,9 @@ const userString = computed(() => {
     </v-responsive>
   </v-footer>
 </template>
+
+<style scoped>
+#footer {
+  max-height: 40px;
+}
+</style>

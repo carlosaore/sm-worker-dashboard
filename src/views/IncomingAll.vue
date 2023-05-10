@@ -4,6 +4,9 @@ import CommonViewWrapper from "@/components/CommonViewWrapper.vue";
 
 <template>
   <CommonViewWrapper>
-    <h1>Entradas</h1>
+    <v-card>
+      <v-card-text>
+      </v-card-text>
+    </v-card>
   </CommonViewWrapper>
 </template>
