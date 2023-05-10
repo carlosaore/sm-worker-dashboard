@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/vue-query";
 import { getBookings } from "@/services";
 import ReadOnlyBookingsTable from "@/components/ReadOnlyBookingsTable.vue";
 import { ref } from "vue";
+import SkeletonLoader from "@/components/SkeletonLoader.vue";
 
 const updatedAt = ref("Actualizando...");
 
@@ -41,6 +42,7 @@ const {
   >
     <v-card-text>
       <ReadOnlyBookingsTable v-if="isSuccess" :bookings="getBookingsData.data.data" path-prefix="/entradas" />
+      <SkeletonLoader v-else height="150" />
     </v-card-text>
   </v-card>
 </template>

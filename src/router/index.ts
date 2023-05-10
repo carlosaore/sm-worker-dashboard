@@ -13,8 +13,8 @@ import OutgoingOne from "@/views/OutgoingOne.vue";
 
 const routes = [
   {
-    path: "/", // you shouldn't be able to access this route, but if you do, redirect to home
-    redirect: { name: "Home" },
+    path: "/",
+    redirect: "/home",
   },
   {
     path: "/home",
@@ -73,12 +73,11 @@ const router = createRouter({
   routes,
 });
 
-// This is a global guard that will be called for all routes
 router.beforeEach(async (to) => {
   const authStore = useAuthStore();
   // If the user is not logged in and is not trying to access the login page, logout
-  if (!authStore.userIsLoggedIn && to.name !== "Login") {
-    console.log("User is not logged in and is not trying to access the login page, logout");
+  if (!authStore.userIsLoggedIn && to.name !== "login") {
+    console.error("User is not logged in and is not trying to access the login page -> logout");
     await authStore.logout();
     return false;
   }

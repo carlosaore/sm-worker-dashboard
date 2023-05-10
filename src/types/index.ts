@@ -96,6 +96,8 @@ export interface GetBookingsQueryParams {
   limit?: number;
   sort_by?: 'date_ini' | 'date_end' | 'created_at' | 'updated_at' | 'deleted_at';
   sort_order?: 'asc' | 'desc';
+  berth_type?: string; // Enum? 'short' | 'long'
+  ship_type?: string; // Enum? 'catamaran' | 'sailboat' | 'motorboat'
 }
 
 /**
@@ -111,4 +113,13 @@ export type RealGetBookingsQueryParams = {
   limit?: string;
   sort_by?: 'date_ini' | 'date_end' | 'created_at' | 'updated_at' | 'deleted_at';
   sort_order?: 'asc' | 'desc';
+  berth_type?: string;
+  ship_type?: string;
+}
+
+export interface Filter {
+  key: keyof GetBookingsQueryParams; // key to be used in the query string
+  value: GetBookingsQueryParams[keyof GetBookingsQueryParams]; // value to be used in the query string
+  icon: string; // icon to be displayed in the chip
+  displayedValue: string; // value to be displayed in the chip (could be different from value for legibility)
 }
