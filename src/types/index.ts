@@ -55,6 +55,56 @@ export interface LoginResponse {
   data: User;
 }
 
+export interface User {
+  uuid: string;
+  name: string;
+  lastname: string;
+  email: string;
+  email_verified_at: string;
+  country_phone_iso2: string;
+  language: string;
+  phone: string | null;
+  created_at: string;
+  updated_at: string | null;
+  deleted_at: string | null;
+}
+
+export interface Berth {
+  id: number;
+  name: string;
+  external_id: string;
+  disabled: number; // 0 or 1
+  light: number; // 0 or 1
+  water: number; // 0 or 1
+  closed: number; // 0 or 1
+  has_owner: number; // 0 or 1
+  port_id: number;
+  berth_group_id: number;
+  notes: string | null;
+  created_at: string;
+  updated_at: string;
+  deleted_at: string | null;
+}
+
+export interface Ship {
+  name: string;
+  length: string;
+  beam: string;
+  draft: string;
+  type: number; // 1 | 2 | 3
+  target: string;
+  flag: string;
+  mmsi: null | string; // TODO: What is this?
+  insurance: string;
+  insurance_expires_at: string;
+  validated: number; // 0 or 1
+  commercial_use: number; // 0 or 1
+  user_id: number;
+  created_at: string;
+  updated_at: string;
+  deleted_at: null;
+}
+
 export interface Booking {
   id: number;
   is_subscription: number; // 0 or 1
@@ -72,6 +122,9 @@ export interface Booking {
   created_at: string;
   updated_at: string | null;
   deleted_at: string | null;
+  user: User;
+  ship: Ship;
+  berth: Berth;
 }
 
 export interface GetBookingsResponse {
@@ -91,7 +144,7 @@ export interface GetBookingsResponse {
  * May also be used for a filter component in the UI but not for the actual request
  */
 export interface GetBookingsQueryParams {
-  type?: 'arrivals' | 'departures';
+  type?: "arrivals" | "departures";
   page?: number;
   limit?: number;
   berth_name?: string;
@@ -113,7 +166,7 @@ export type RealGetBookingsQueryParams = {
   ship_name?: string;
   target?: string; // "Matricula" ??
   user_name?: string;
-}
+};
 
 /**
  * An array of Filter objects tied to a form and a display component
@@ -128,7 +181,7 @@ export interface Filter {
   value: string;
   // icon to be displayed in the chip
   icon:
-    "mdi-sail-boat" // for ship name
+    | "mdi-sail-boat" // for ship name
     | "mdi-account-tie-hat" // for "captain" name
     | "mdi-alphabetical-variant" // for "matricula" name
     | "mdi-pier"; // for berth name

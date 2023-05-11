@@ -5,6 +5,10 @@ import { computed, ref } from "vue";
 import { Filter } from "@/types";
 import FilterChips from "@/components/FilterChips.vue";
 import FilterDialogContent from "@/components/FilterDialogContent.vue";
+import { useQuery } from "@tanstack/vue-query";
+import { getBookings } from "@/services";
+import BookingsTable from "@/components/BookingsTable.vue";
+import SkeletonLoader from "@/components/SkeletonLoader.vue";
 
 /**
  * This is the list of filters that are currently applied to the bookings list
@@ -22,6 +26,13 @@ const getBookingsQueryParams = computed<GetBookingsQueryParams>(() => {
     params[filter.key] = filter.value;
   });
   return params;
+});
+
+const { isSuccess, data } = useQuery({
+  queryKey: ["getBookings", getBookingsQueryParams],
+  queryFn: ({queryKey}) => getBookings(queryKey[1]),
+  refetchInterval: 60000, // 1 minute in milliseconds (modify to your needs)
+  keepPreviousData: true,
 });
 
 /**
@@ -61,27 +72,33 @@ const closeFilterDialog = () => {
 
 <template>
   <CommonViewWrapper>
-    <v-sheet rounded elevation="2" class="pa-4">
-      <v-row>
-        <v-col>
-          <FilterChips :appliedFilters="appliedFilters" @remove-filter="removeFilter" />
-        </v-col>
-        <v-col cols="auto">
-          <v-btn color="primary" variant="text" prepend-icon="mdi-filter">
-            Filtrar
-            <v-dialog v-model="filterDialogActive" activator="parent" width="auto">
-              <FilterDialogContent
-                title="Filtrar reservas"
-                :appliedFilters="appliedFilters"
-                @add-filter="addFilter"
-                @update-filters="updateFilters"
-                @close-dialog="closeFilterDialog"
-                @clear-filters="clearFilters"
-              />
-            </v-dialog>
-          </v-btn>
-        </v-col>
-      </v-row>
-    </v-sheet>
+    <v-card>
+      <v-card-title>
+        <v-row>
+          <v-col>
+            <FilterChips :appliedFilters="appliedFilters" @remove-filter="removeFilter" />
+          </v-col>
+          <v-col cols="auto">
+            <v-btn color="primary" size="small" variant="text" prepend-icon="mdi-filter">
+              Filtrar
+              <v-dialog v-model="filterDialogActive" activator="parent" width="auto">
+                <FilterDialogContent
+                  title="Filtrar reservas"
+                  :appliedFilters="appliedFilters"
+                  @add-filter="addFilter"
+                  @update-filters="updateFilters"
+                  @close-dialog="closeFilterDialog"
+                  @clear-filters="clearFilters"
+                />
+              </v-dialog>
+            </v-btn>
+          </v-col>
+        </v-row>
+      </v-card-title>
+      <v-card-text>
+        <BookingsTable v-if="isSuccess" :bookings="data.data.data" path-prefix="/entradas" />
+        <SkeletonLoader v-else height="150" />
+      </v-card-text>
+    </v-card>
   </CommonViewWrapper>
 </template>

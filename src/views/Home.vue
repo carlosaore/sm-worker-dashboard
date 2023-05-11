@@ -7,7 +7,6 @@ import NextDepartures from "@/components/NextDepartures.vue";
 <template>
   <CommonViewWrapper>
     <NextArrivals class="mb-6" />
-    <NextDepartures class="mb-6" />
     <NextDepartures />
   </CommonViewWrapper>
 </template>

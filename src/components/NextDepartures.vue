@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { useQuery } from "@tanstack/vue-query";
 import { getBookings } from "@/services";
-import ReadOnlyBookingsTable from "@/components/ReadOnlyBookingsTable.vue";
 import { ref } from "vue";
+import ReadOnlyBookingsTable from "@/components/ReadOnlyBookingsTable.vue";
 import SkeletonLoader from "@/components/SkeletonLoader.vue";
+import router from "@/router";
 
 const updatedAt = ref("Actualizando...");
 
@@ -11,8 +12,9 @@ const {
   isSuccess,
   data: getBookingsData,
   isLoading,
+  refetch,
 } = useQuery({
-  queryKey: ["next5IncomingBookings"],
+  queryKey: ["next5Departures"],
   queryFn: () =>
     getBookings({
       type: "departures",
@@ -42,5 +44,26 @@ const {
       <ReadOnlyBookingsTable v-if="isSuccess" :bookings="getBookingsData.data.data" path-prefix="/salidas" />
       <SkeletonLoader v-else height="150" />
     </v-card-text>
+    <v-card-actions>
+      <v-btn
+        variant="text"
+        size="small"
+        prepend-icon="mdi-refresh"
+        color="grey"
+        @click="refetch"
+      >
+        Refrescar
+      </v-btn>
+      <v-spacer />
+      <v-btn
+        variant="text"
+        size="small"
+        prepend-icon="mdi-refresh"
+        color="primary"
+        @click="router.push('/salidas')"
+      >
+        Ver todas
+      </v-btn>
+    </v-card-actions>
   </v-card>
 </template>

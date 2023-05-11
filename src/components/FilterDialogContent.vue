@@ -47,7 +47,7 @@ const onFinish = () => {
       filtersToEmit.push({
         key: "user_name",
         value: formValues.value.user_name,
-        displayedValue: `Navegante: ${formValues.value.user_name}...`,
+        displayedValue: `${formValues.value.user_name}...`,
         icon: "mdi-account-tie-hat",
       });
     }
@@ -55,7 +55,7 @@ const onFinish = () => {
       filtersToEmit.push({
         key: "ship_name",
         value: formValues.value.ship_name,
-        displayedValue: `Embarcación: ${formValues.value.ship_name}...`,
+        displayedValue: `${formValues.value.ship_name}...`,
         icon: "mdi-sail-boat",
       });
     }

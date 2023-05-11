@@ -12,7 +12,7 @@ const emits = defineEmits<{
 </script>
 
 <template>
-  <v-chip-group>
+  <v-chip-group class="py-0">
     <v-chip
       size="small"
       class="text-blue-darken-2"
