@@ -18,8 +18,6 @@ const {
       type: "arrivals",
       page: 1,
       limit: 5,
-      sort_by: "date_ini",
-      sort_order: "asc",
     }),
   refetchInterval: 60000, // 1 minute in milliseconds (modify to your needs)
   keepPreviousData: true,

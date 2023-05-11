@@ -10,20 +10,7 @@ import FilterDialogContent from "@/components/FilterDialogContent.vue";
  * This is the list of filters that are currently applied to the bookings list
  * It is used to display the chips and to generate the query string
  */
-const appliedFilters = ref<Filter[]>([
-  {
-    key: "sort_by",
-    value: "date_ini",
-    icon: "mdi-clock-start",
-    displayedValue: "Desde 10 may",
-  },
-  {
-    key: "sort_by",
-    value: "date_end",
-    icon: "mdi-clock-end",
-    displayedValue: "Hasta 11 may",
-  },
-]);
+const appliedFilters = ref<Filter[]>([]);
 
 /**
  * Computed GetBookingsQueryParams object from the appliedFilters list

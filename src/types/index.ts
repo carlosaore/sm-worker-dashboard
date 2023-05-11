@@ -94,10 +94,10 @@ export interface GetBookingsQueryParams {
   type?: 'arrivals' | 'departures';
   page?: number;
   limit?: number;
-  sort_by?: 'date_ini' | 'date_end' | 'created_at' | 'updated_at' | 'deleted_at';
-  sort_order?: 'asc' | 'desc';
-  berth_type?: string; // Enum? 'short' | 'long'
-  ship_type?: string; // Enum? 'catamaran' | 'sailboat' | 'motorboat'
+  berth_name?: string;
+  ship_name?: string;
+  target?: string; // "Matricula" ??
+  user_name?: string;
 }
 
 /**
@@ -108,18 +108,30 @@ export interface GetBookingsQueryParams {
  */
 export type RealGetBookingsQueryParams = {
   page: string;
-  date_ini?: string;
-  date_end?: string;
   limit?: string;
-  sort_by?: 'date_ini' | 'date_end' | 'created_at' | 'updated_at' | 'deleted_at';
-  sort_order?: 'asc' | 'desc';
-  berth_type?: string;
-  ship_type?: string;
+  berth_name?: string;
+  ship_name?: string;
+  target?: string; // "Matricula" ??
+  user_name?: string;
 }
 
+/**
+ * An array of Filter objects tied to a form and a display component
+ * Intended to ease filter form logic and applied filter display
+ * Loosely related to the GetBookingsQueryParams type
+ * NOTE: Might not be the best implementation, but I already did it so...
+ */
 export interface Filter {
-  key: keyof GetBookingsQueryParams; // key to be used in the query string
-  value: GetBookingsQueryParams[keyof GetBookingsQueryParams]; // value to be used in the query string
-  icon: string; // icon to be displayed in the chip
-  displayedValue: string; // value to be displayed in the chip (could be different from value for legibility)
+  // key to be used in the query string (GetBookingsQueryParams)
+  key: keyof GetBookingsQueryParams;
+  // value to be used in the query string
+  value: string;
+  // icon to be displayed in the chip
+  icon:
+    "mdi-sail-boat" // for ship name
+    | "mdi-account-tie-hat" // for "captain" name
+    | "mdi-alphabetical-variant" // for "matricula" name
+    | "mdi-pier"; // for berth name
+  // value to be displayed in the chip (e.g. `Embarcación "La Ro..."`, `Matricula "1234..."`)
+  displayedValue: string;
 }

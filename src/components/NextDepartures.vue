@@ -18,8 +18,6 @@ const {
       type: "departures",
       page: 1,
       limit: 5,
-      sort_by: "date_end",
-      sort_order: "asc",
     }),
   refetchInterval: 60000, // 1 minute in milliseconds (modify to your needs)
   keepPreviousData: true,

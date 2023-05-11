@@ -15,6 +15,7 @@ const emits = defineEmits<{
   <v-chip-group>
     <v-chip
       size="small"
+      class="text-blue-darken-2"
       v-for="filter in props.appliedFilters"
       :key="filter.value"
       closable

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Filter, GetBookingsQueryParams } from "@/types";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 
 interface Props {
   appliedFilters: Filter[];
@@ -16,16 +16,67 @@ const emits = defineEmits<{
   (event: "close-dialog"): void;
 }>();
 
+const getFilterValue = (key: keyof GetBookingsQueryParams) => {
+  const filter = props.appliedFilters.find((f) => f.key === key);
+  if (filter) {
+    return filter.value;
+  }
+  return "";
+};
+
+/**
+ * On mount, we populate the formValues with appliedFilters values
+ */
+onMounted(() => {
+  formValues.value = {
+    user_name: getFilterValue("user_name"),
+    ship_name: getFilterValue("ship_name"),
+    target: getFilterValue("target"),
+    berth_name: getFilterValue("berth_name"),
+  };
+});
+
 const formValid = ref(true); // starts as true because there are no required fields
 
 const formValues = ref<GetBookingsQueryParams>({});
 
 const onFinish = () => {
   if (formValid.value) {
-    // console log the form values
-    console.log({
-      berth_type: formValues.value.berth_type,
-    });
+    const filtersToEmit: Filter[] = [];
+    if (formValues.value.user_name) {
+      filtersToEmit.push({
+        key: "user_name",
+        value: formValues.value.user_name,
+        displayedValue: `Navegante: ${formValues.value.user_name}...`,
+        icon: "mdi-account-tie-hat",
+      });
+    }
+    if (formValues.value.ship_name) {
+      filtersToEmit.push({
+        key: "ship_name",
+        value: formValues.value.ship_name,
+        displayedValue: `Embarcación: ${formValues.value.ship_name}...`,
+        icon: "mdi-sail-boat",
+      });
+    }
+    if (formValues.value.target) {
+      filtersToEmit.push({
+        key: "target",
+        value: formValues.value.target,
+        displayedValue: `Matricula: ${formValues.value.target}`,
+        icon: "mdi-alphabetical-variant",
+      });
+    }
+    if (formValues.value.berth_name) {
+      filtersToEmit.push({
+        key: "berth_name",
+        value: formValues.value.berth_name,
+        displayedValue: `Amarre: ${formValues.value.berth_name}`,
+        icon: "mdi-pier",
+      });
+    }
+    emits("update-filters", filtersToEmit);
+    emits("close-dialog");
     return;
   }
   console.log("invalid form");
@@ -45,27 +96,53 @@ const handleCloseDialog = () => {
   <v-card :title="props.title" prepend-icon="mdi-filter">
     <v-card-text>
       <v-form v-model="formValid" @submit.prevent="onFinish">
-        <span class="subheading">Tipo de amarre</span>
-        <v-chip-group v-model="formValues.berth_type" selected-class="text-blue-darken-4">
-          <v-chip prepend-icon="mdi-calendar-range" value="short">Corta estancia</v-chip>
-          <v-chip prepend-icon="mdi-calendar-month" value="long">Larga estancia</v-chip>
-        </v-chip-group>
-        <v-divider class="my-3"></v-divider>
-        <div class="subheading">Tipo de embarcación</div>
-        <v-chip-group v-model="formValues.ship_type" selected-class="text-blue-darken-4">
-          <v-chip value="catamaran">Catamaran</v-chip>
-          <v-chip value="sailboat">Velero</v-chip>
-          <v-chip value="motorboat">Motor</v-chip>
-        </v-chip-group>
-        <v-btn color="primary" type="submit" variant="tonal" prepend-icon="mdi-filter-check" block class="mt-4"
-          >Guardar</v-btn
-        >
+        <v-text-field
+          label="Navegante"
+          v-model="formValues.user_name"
+          hint="Todo o parte del nombre"
+          clearable
+          persistent-hint
+          prepend-inner-icon="mdi-account-tie-hat"
+          class="mb-4"
+        ></v-text-field>
+        <v-text-field
+          label="Embarcación"
+          v-model="formValues.ship_name"
+          hint="Todo o parte del nombre"
+          clearable
+          persistent-hint
+          prepend-inner-icon="mdi-sail-boat"
+          class="mb-4"
+        ></v-text-field>
+        <v-text-field
+          label="Matrícula"
+          v-model="formValues.target"
+          hint="Matrícula de la embarcación"
+          clearable
+          persistent-hint
+          prepend-inner-icon="mdi-alphabetical-variant"
+          class="mb-4"
+        ></v-text-field>
+        <v-text-field
+          label="Amarre"
+          v-model="formValues.berth_name"
+          hint="Todo o parte del nombre"
+          clearable
+          persistent-hint
+          prepend-inner-icon="mdi-pier"
+          class="mb-4"
+        ></v-text-field>
+        <v-btn color="primary" type="submit" variant="tonal" prepend-icon="mdi-filter-check" block class="mt-4">
+          Aplicar filtros
+        </v-btn>
       </v-form>
     </v-card-text>
     <v-card-actions>
-      <v-btn @click="handleClearFilters" prepend-icon="mdi-filter-off" size="small">Limpiar</v-btn>
+      <v-btn @click="handleClearFilters" prepend-icon="mdi-filter-off" size="x-small"> Limpiar filtros </v-btn>
       <v-spacer></v-spacer>
-      <v-btn color="error" @click="handleCloseDialog" prepend-icon="mdi-close" size="small">Cerrar</v-btn>
+      <v-btn color="error" @click="handleCloseDialog" prepend-icon="mdi-close" size="x-small">
+        Cerrar sin aplicar
+      </v-btn>
     </v-card-actions>
   </v-card>
 </template>
