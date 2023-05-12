@@ -1,6 +1,6 @@
 export type APIError = any;
 
-export interface User {
+export interface Worker {
   access_token: string; // JWT token
   token_type: string;
   expires_at: string;
@@ -52,7 +52,7 @@ export interface LoginResponse {
   code: number;
   status: number;
   message: string | null;
-  data: User;
+  data: Worker;
 }
 
 export interface User {
@@ -125,6 +125,15 @@ export interface Booking {
   user: User;
   ship: Ship;
   berth: Berth;
+}
+
+export interface GetBookingResponse {
+  error: boolean;
+  errors: APIError[];
+  code: number;
+  status: number;
+  message: string | null;
+  data: Booking;
 }
 
 export interface GetBookingsResponse {

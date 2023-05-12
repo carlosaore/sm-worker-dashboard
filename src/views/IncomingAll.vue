@@ -111,7 +111,7 @@ const closeFilterDialog = () => {
       </v-card-title>
       <v-card-text>
         <BookingsTable v-if="isSuccess" :bookings="data.data.data" path-prefix="/entradas" />
-        <SkeletonLoader v-else height="150" />
+        <SkeletonLoader v-else height="600" />
       </v-card-text>
       <v-card-actions v-if="isSuccess && data.data.items">
         <v-spacer></v-spacer>

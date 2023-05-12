@@ -1,30 +1,30 @@
 import { defineStore } from "pinia";
 import router from "@/router";
-import { User } from "@/types";
+import { Worker } from "@/types";
 import { authenticatedApi } from "@/services/config";
 
 export const useAuthStore = defineStore({
   id: "auth",
   state: () => ({
-    userIsLoggedIn: false,
-    user: localStorage.getItem("user")
-      ? JSON.parse(localStorage.getItem("user") as string)
+    workerIsLoggedIn: false,
+    worker: localStorage.getItem("worker")
+      ? JSON.parse(localStorage.getItem("worker") as string)
       : null,
   }),
   actions: {
-    async login(user: User, rememberMe: boolean) {
-        this.user = user;
-        this.userIsLoggedIn = true;
+    async login(worker: Worker, rememberMe: boolean) {
+        this.worker = worker;
+        this.workerIsLoggedIn = true;
         if (rememberMe) {
-          localStorage.setItem("user", JSON.stringify(user));
+          localStorage.setItem("worker", JSON.stringify(worker));
         }
-        authenticatedApi.defaults.headers.common["Authorization"] = `Bearer ${user.access_token}`;
+        authenticatedApi.defaults.headers.common["Authorization"] = `Bearer ${worker.access_token}`;
         await router.push("/home");
     },
     async logout() {
-      this.user = null;
-      this.userIsLoggedIn = false;
-      localStorage.removeItem("user");
+      this.worker = null;
+      this.workerIsLoggedIn = false;
+      localStorage.removeItem("worker");
       authenticatedApi.defaults.headers.common["Authorization"] = "";
       // Should we clear localStorage here? localStorage.clear() ? Should we clear the router history too?
       await router.push("/login");
@@ -38,11 +38,11 @@ export const useAuthStore = defineStore({
      * If there is no user in localStorage, calls logout() to do all the necessary cleanup and redirect to login page
      */
     async checkAuth() {
-      const userInLocalStorage = Boolean(localStorage.getItem("user"));
+      const userInLocalStorage = Boolean(localStorage.getItem("worker"));
       if (userInLocalStorage) {
-        this.user = JSON.parse(localStorage.getItem("user") as string);
-        this.userIsLoggedIn = true;
-        authenticatedApi.defaults.headers.common["Authorization"] = `Bearer ${this.user.access_token}`;
+        this.worker = JSON.parse(localStorage.getItem("worker") as string);
+        this.workerIsLoggedIn = true;
+        authenticatedApi.defaults.headers.common["Authorization"] = `Bearer ${this.worker.access_token}`;
         await router.push("/home");
       } else {
         await this.logout();

@@ -2,11 +2,11 @@
 import { useAuthStore } from "@/store/auth.store";
 import { computed } from "vue";
 
-const { user } = useAuthStore();
+const { worker } = useAuthStore();
 
-const userString = computed(() => {
-  if (user) {
-    return `${user.profile.name} ${user.profile.lastname}`;
+const workerString = computed(() => {
+  if (worker) {
+    return `${worker.profile.name} ${worker.profile.lastname}`;
   }
   return "";
 });
@@ -18,7 +18,7 @@ const userString = computed(() => {
       <v-row align="center" justify="center">
         <v-col class="text-center pa-0">
           <span class="text-caption text-white">
-            Logueado como: {{ userString }}
+            Logueado como: {{ workerString }}
           </span>
         </v-col>
       </v-row>

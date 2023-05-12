@@ -2,7 +2,6 @@ import axios from "axios";
 
 const baseURL = "http://localhost:5000";
 const userInLocalStorage = Boolean(localStorage.getItem("user"));
-console.log(userInLocalStorage);
 
 /**
  * Axios instance for the initial login request or any other unauthenticated requests with base url

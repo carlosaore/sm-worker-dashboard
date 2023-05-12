@@ -5,6 +5,7 @@ import { useMutation } from "@tanstack/vue-query";
 import { login } from "@/services";
 import { AxiosResponse } from "axios";
 import { LoginResponse } from "@/types";
+import router from "@/router";
 
 const authStore = useAuthStore();
 
@@ -35,8 +36,7 @@ const onFinish = async () => {
 };
 
 const onPasswordForgot = () => {
-  console.log("onPasswordForgot");
-  // router.push("/reset-password");
+  router.push("/reset-password");
 };
 </script>
 

@@ -74,11 +74,10 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to) => {
-  const authStore = useAuthStore();
+  const { workerIsLoggedIn, logout } = useAuthStore();
   // If the user is not logged in and is not trying to access the login page, logout
-  if (!authStore.userIsLoggedIn && to.name !== "login") {
-    console.error("User is not logged in and is not trying to access the login page -> logout");
-    await authStore.logout();
+  if (!workerIsLoggedIn && to.name !== "login" && to.name !== "resetPassword") {
+    await logout();
     return false;
   }
 });

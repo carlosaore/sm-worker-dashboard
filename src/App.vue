@@ -15,10 +15,10 @@ onMounted(() => {
 
 <template>
   <v-app>
-    <NavigationBar v-if="authStore.userIsLoggedIn"/>
+    <NavigationBar v-if="authStore.workerIsLoggedIn"/>
     <v-main>
       <router-view></router-view>
     </v-main>
-    <Footer v-if="authStore.userIsLoggedIn"/>
+    <Footer v-if="authStore.workerIsLoggedIn"/>
   </v-app>
 </template>
