@@ -66,7 +66,7 @@ const handleRowClick = (id: number) => {
       <tr>
         <th v-for="header in headers" :key="header.text">
           <div class="d-flex flex-column align-center justify-center">
-            <v-icon color="blue-darken-4" v-if="header.icon">{{ header.icon }}</v-icon>
+            <v-icon color="blue-darken-2" v-if="header.icon">{{ header.icon }}</v-icon>
             <span class="text-caption">{{ header.text }}</span>
           </div>
         </th>

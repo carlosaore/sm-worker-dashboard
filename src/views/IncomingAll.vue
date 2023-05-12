@@ -11,17 +11,29 @@ import BookingsTable from "@/components/BookingsTable.vue";
 import SkeletonLoader from "@/components/SkeletonLoader.vue";
 
 /**
+ * This is the limit of bookings per page
+ * Hardcoded for now, but as anything, you can add Sriracha to it to make it dynamic
+ */
+const limit = 10;
+
+/**
  * This is the list of filters that are currently applied to the bookings list
  * It is used to display the chips and to generate the query string
  */
 const appliedFilters = ref<Filter[]>([]);
+
+const page = ref(1);
 
 /**
  * Computed GetBookingsQueryParams object from the appliedFilters list
  * Used by useQuery to fetch the bookings
  */
 const getBookingsQueryParams = computed<GetBookingsQueryParams>(() => {
-  const params: GetBookingsQueryParams = {};
+  const params: GetBookingsQueryParams = {
+    type: "arrivals",
+    page: page.value,
+    limit: limit,
+  };
   appliedFilters.value.forEach((filter) => {
     params[filter.key] = filter.value;
   });
@@ -30,10 +42,12 @@ const getBookingsQueryParams = computed<GetBookingsQueryParams>(() => {
 
 const { isSuccess, data } = useQuery({
   queryKey: ["getBookings", getBookingsQueryParams],
-  queryFn: ({queryKey}) => getBookings(queryKey[1]),
+  queryFn: ({ queryKey }) => getBookings(queryKey[1]),
   refetchInterval: 60000, // 1 minute in milliseconds (modify to your needs)
   keepPreviousData: true,
 });
+
+
 
 /**
  * Adds a filter to the appliedFilters list
@@ -99,6 +113,18 @@ const closeFilterDialog = () => {
         <BookingsTable v-if="isSuccess" :bookings="data.data.data" path-prefix="/entradas" />
         <SkeletonLoader v-else height="150" />
       </v-card-text>
+      <v-card-actions v-if="isSuccess && data.data.items">
+        <v-spacer></v-spacer>
+        <v-pagination
+          v-model="page"
+          density="compact"
+          rounded="circle"
+          total-visible="6"
+          :length="Math.ceil(data.data.items / limit)"
+        >
+        </v-pagination>
+        <v-spacer></v-spacer>
+      </v-card-actions>
     </v-card>
   </CommonViewWrapper>
 </template>

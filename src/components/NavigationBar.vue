@@ -12,6 +12,14 @@ const toggleDrawer = () => {
 
 const currentRoute = router.currentRoute;
 
+const handleNavigation = (route: string) => {
+  router.push(route);
+  drawerActive.value = false;
+};
+
+// TODO: How will we retrieve the notifications? An endpoint? From User in auth store?
+const dummyNotificationsCount = 1;
+
 const title = computed(() => {
   switch (currentRoute.value.name) {
     case "home":
@@ -44,7 +52,11 @@ const title = computed(() => {
     <v-toolbar-title class="text-white">{{ title }}</v-toolbar-title>
     <v-spacer></v-spacer>
     <v-btn variant="text" icon="mdi-arrow-left" @click="router.go(-1)" color="white"></v-btn>
-    <v-btn variant="text" icon="mdi-bell" @click="router.push('/notificaciones')" color="white"></v-btn>
+    <v-btn variant="text" @click="router.push('/notificaciones')" color="white">
+      <v-badge dot :model-value="dummyNotificationsCount > 0" color="error">
+        <v-icon>mdi-bell</v-icon>
+      </v-badge>
+    </v-btn>
     <v-btn variant="text" icon="mdi-home" @click="router.push('/home')" color="white"></v-btn>
   </v-app-bar>
   <v-navigation-drawer v-model="drawerActive" location="top" id="nav_drawer">
@@ -54,28 +66,28 @@ const title = computed(() => {
         title="Entradas"
         value="incoming"
         :active="currentRoute.name === 'incomingAll'"
-        @click="router.push('/entradas')"
+        @click="handleNavigation('/entradas')"
       ></v-list-item>
       <v-list-item
         prepend-icon="mdi-export"
         title="Salidas"
         value="outgoing"
         :active="currentRoute.name === 'outgoingAll'"
-        @click="router.push('/salidas')"
+        @click="handleNavigation('/salidas')"
       ></v-list-item>
       <v-list-item
         prepend-icon="mdi-pier"
         title="Amarres libres"
         value="berths"
         :active="currentRoute.name === 'berthsAll'"
-        @click="router.push('/amarres')"
+        @click="handleNavigation('/amarres')"
       ></v-list-item>
       <v-list-item
         prepend-icon="mdi-bell"
         title="Notificaciones"
         value="notifications"
         :active="currentRoute.name === 'notifications'"
-        @click="router.push('/notificaciones')"
+        @click="handleNavigation('/notificaciones')"
       ></v-list-item>
     </v-list>
     <v-divider></v-divider>
@@ -84,7 +96,7 @@ const title = computed(() => {
         prepend-icon="mdi-account"
         title="Perfil"
         value="profile"
-        @click="router.push('/perfil')"
+        @click="handleNavigation('/perfil')"
         :active="currentRoute.name === 'profile'"
       ></v-list-item>
       <v-list-item prepend-icon="mdi-logout" title="Cerrar sesión" value="logout" @click="logout"></v-list-item>

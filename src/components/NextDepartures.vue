@@ -45,6 +45,7 @@ const {
       <SkeletonLoader v-else height="150" />
     </v-card-text>
     <v-card-actions>
+      <v-spacer />
       <v-btn
         variant="text"
         size="small"
@@ -54,7 +55,6 @@ const {
       >
         Refrescar
       </v-btn>
-      <v-spacer />
       <v-btn
         variant="text"
         size="small"
