@@ -9,6 +9,9 @@ interface Props {
   user_lastname: string;
   validated: boolean;
   berth_name: string;
+  length: string;
+  beam: string;
+  draft: string;
 }
 const props = defineProps<Props>();
 
@@ -35,7 +38,7 @@ const dateEnd = getDateProps(props.date_end);
 <template>
   <v-card title="Detalles de la reserva">
     <v-card-text>
-      <v-row>
+      <v-row align="center">
         <v-col cols="12" sm="12" md="6" lg="6" xl="6" xxl="6">
           <div id="booking-dates">
             <span class="text-h4 text-blue">{{ dateIni.day }}</span>
@@ -51,7 +54,6 @@ const dateEnd = getDateProps(props.date_end);
               {{ dateIni.weekday }}
             </span>
           </div>
-          <span></span>
         </v-col>
         <v-col cols="6" sm="6" md="3" lg="3" xl="3" xxl="3">
           <div id="booking-details">
@@ -67,6 +69,13 @@ const dateEnd = getDateProps(props.date_end);
                 color="blue-darken-2"
               />
               {{ ship_name }}
+            </p>
+            <p class="text-caption">
+              <v-icon
+                icon="mdi-ruler"
+                color="blue-darken-2"
+              />
+              E {{ length }} - M {{ beam }} - C {{ draft }}
             </p>
           </div>
         </v-col>

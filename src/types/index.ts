@@ -61,7 +61,7 @@ export interface User {
   lastname: string;
   email: string;
   email_verified_at: string;
-  country_phone_iso2: string;
+  country_phone_iso2: string | null;
   language: string;
   phone: string | null;
   created_at: string;
