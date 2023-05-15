@@ -27,15 +27,15 @@ const title = computed(() => {
     case "outgoingAll":
       return "Reservas salientes";
     case "outgoingOne":
-      return "Detalles de la reserva saliente";
+      return "";
     case "incomingAll":
       return "Reservas entrantes";
     case "incomingOne":
-      return "Detalles de la reserva entrante";
+      return "";
     case "berthsAll":
       return "Amarres libres";
     case "berthsOne":
-      return "Detalles del amarre";
+      return "";
     case "notifications":
       return "Notificaciones";
     case "profile":
