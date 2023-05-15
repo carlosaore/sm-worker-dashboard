@@ -40,7 +40,6 @@ const getDateProps = (dateString: string): {
         </pre>
       </v-col>
       <v-col sm="6" md="12" lg="12" xl="12" xxl="12">
-
       </v-col>
     </v-card-text>
   </v-card>

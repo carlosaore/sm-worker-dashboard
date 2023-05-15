@@ -19,6 +19,17 @@ export const useAuthStore = defineStore({
           localStorage.setItem("worker", JSON.stringify(worker));
         }
         authenticatedApi.defaults.headers.common["Authorization"] = `Bearer ${worker.access_token}`;
+        authenticatedApi.interceptors.response.use(
+          (response) => response,
+          async (error) => {
+            if (error.response.status === 401) {
+              // Removed alert because it was annoying
+              // alert('Su sesión ha expirado, por favor vuelva a iniciar sesión');
+              await this.logout();
+            }
+            return Promise.reject(error);
+          }
+        );
         await router.push("/home");
     },
     async logout() {
@@ -43,6 +54,12 @@ export const useAuthStore = defineStore({
         this.worker = JSON.parse(localStorage.getItem("worker") as string);
         this.workerIsLoggedIn = true;
         authenticatedApi.defaults.headers.common["Authorization"] = `Bearer ${this.worker.access_token}`;
+        authenticatedApi.interceptors.response.use(
+          (response) => response,
+          async (error) => {
+            return Promise.reject(error);
+          }
+        );
         await router.push("/home");
       } else {
         await this.logout();

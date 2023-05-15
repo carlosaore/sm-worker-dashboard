@@ -9,6 +9,16 @@ import { useQuery } from "@tanstack/vue-query";
 import { getBookings } from "@/services";
 import BookingsTable from "@/components/BookingsTable.vue";
 import SkeletonLoader from "@/components/SkeletonLoader.vue";
+import ErrorModal from "@/components/ErrorModal.vue";
+
+const loginError = ref({
+  isActive: false,
+  title: "",
+  message: "",
+});
+const closeErrorModal = () => {
+  loginError.value.isActive = false;
+};
 
 /**
  * This is the limit of bookings per page
@@ -45,9 +55,14 @@ const { isSuccess, data } = useQuery({
   queryFn: ({ queryKey }) => getBookings(queryKey[1]),
   refetchInterval: 60000, // 1 minute in milliseconds (modify to your needs)
   keepPreviousData: true,
+  onError: (error) => {
+    loginError.value = {
+      isActive: true,
+      title: "Error",
+      message: error.message,
+    };
+  },
 });
-
-
 
 /**
  * Adds a filter to the appliedFilters list
@@ -126,5 +141,11 @@ const closeFilterDialog = () => {
         <v-spacer></v-spacer>
       </v-card-actions>
     </v-card>
+    <ErrorModal
+      :isActive="loginError.isActive"
+      :title="loginError.title"
+      :message="loginError.message"
+      @close-error-modal="closeErrorModal"
+    />
   </CommonViewWrapper>
 </template>

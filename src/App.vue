@@ -10,15 +10,20 @@ const authStore = useAuthStore();
 onMounted(() => {
   authStore.checkAuth();
 });
-
 </script>
 
 <template>
   <v-app>
-    <NavigationBar v-if="authStore.workerIsLoggedIn"/>
+    <NavigationBar v-if="authStore.workerIsLoggedIn" />
     <v-main>
       <router-view></router-view>
     </v-main>
-    <Footer v-if="authStore.workerIsLoggedIn"/>
+    <Footer v-if="authStore.workerIsLoggedIn" />
   </v-app>
 </template>
+
+<style>
+html {
+  overflow-y: auto;
+}
+</style>

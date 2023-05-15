@@ -18,9 +18,9 @@ type Headers = {
 const parseDateIntoCompactDate = (date: string): string => {
   const parsedDate = new Date(date);
   return parsedDate.toLocaleDateString("es-ES", {
-    year: "numeric",
-    month: "2-digit",
+    month: "short",
     day: "2-digit",
+    year: (parsedDate.getFullYear() !== new Date().getFullYear()) ? "numeric" : undefined,
   });
 };
 

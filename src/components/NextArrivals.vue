@@ -5,6 +5,16 @@ import ReadOnlyBookingsTable from "@/components/ReadOnlyBookingsTable.vue";
 import { ref } from "vue";
 import SkeletonLoader from "@/components/SkeletonLoader.vue";
 import router from "@/router";
+import ErrorModal from "@/components/ErrorModal.vue";
+
+const loginError = ref({
+  isActive: false,
+  title: "",
+  message: "",
+});
+const closeErrorModal = () => {
+  loginError.value.isActive = false;
+};
 
 const updatedAt = ref("Actualizando...");
 
@@ -29,6 +39,13 @@ const {
       minute: "numeric",
       second: "numeric",
     });
+  },
+  onError: (error) => {
+    loginError.value = {
+      isActive: true,
+      title: "Error",
+      message: error.message,
+    };
   },
 });
 </script>
@@ -65,5 +82,11 @@ const {
         Ver todas
       </v-btn>
     </v-card-actions>
+    <ErrorModal
+      :isActive="loginError.isActive"
+      :title="loginError.title"
+      :message="loginError.message"
+      @close-error-modal="closeErrorModal"
+    />
   </v-card>
 </template>

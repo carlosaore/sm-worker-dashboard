@@ -6,6 +6,7 @@ import { login } from "@/services";
 import { AxiosResponse } from "axios";
 import { LoginResponse } from "@/types";
 import router from "@/router";
+import ErrorModal from "@/components/ErrorModal.vue";
 
 const authStore = useAuthStore();
 
@@ -15,6 +16,15 @@ const rememberMe = ref(false);
 const valid = ref(false);
 const showPassword = ref(false);
 
+const loginError = ref({
+  isActive: false,
+  title: "",
+  message: "",
+});
+const closeErrorModal = () => {
+  loginError.value.isActive = false;
+};
+
 const { isLoading, mutateAsync } = useMutation({
   mutationKey: ["loginMutation"],
   mutationFn: login,
@@ -22,16 +32,24 @@ const { isLoading, mutateAsync } = useMutation({
     authStore.login(loginResponse.data.data, rememberMe.value);
   },
   onError: (error) => {
-    console.log(error);
+    loginError.value = {
+      isActive: true,
+      title: "Error",
+      message: error.message,
+    };
   },
 });
 
 const onFinish = async () => {
   if (valid.value) {
-    await mutateAsync({
-      email: email.value,
-      password: password.value,
-    });
+    try {
+      await mutateAsync({
+        email: email.value,
+        password: password.value,
+      });
+    } catch (error) {
+      // we handle the error in the onError of the useMutation, this is just to avoid the unhandled error warning from vue
+    }
   }
 };
 
@@ -42,7 +60,7 @@ const onPasswordForgot = () => {
 
 <template>
   <v-container fluid class="fill-height bg-blue-darken-4">
-    <v-responsive class="">
+    <v-responsive>
       <v-sheet elevation="5" rounded id="login_wrapper">
         <v-card class="pa-6">
           <v-img class="mx-auto mb-6" height="100px" src="/src/assets/full-logo-blue.png"></v-img>
@@ -64,12 +82,20 @@ const onPasswordForgot = () => {
               @click:append-inner="showPassword = !showPassword"
             ></v-text-field>
             <v-checkbox label="Recuérdame" v-model="rememberMe"></v-checkbox>
-            <v-btn block class="mb-6" color="primary" type="submit" :loading="isLoading.value || false"> Login </v-btn>
-            <v-btn block variant="text" type="button" @click="onPasswordForgot">Olvidé mi contraseña</v-btn>
+            <v-btn block class="mb-6" color="primary" type="submit" :loading="isLoading"> Login </v-btn>
+            <v-btn block variant="text" type="button" @click="onPasswordForgot" :loading="isLoading"
+              >Olvidé mi contraseña</v-btn
+            >
           </v-form>
         </v-card>
       </v-sheet>
     </v-responsive>
+    <ErrorModal
+      :isActive="loginError.isActive"
+      :title="loginError.title"
+      :message="loginError.message"
+      @close-error-modal="closeErrorModal"
+    />
   </v-container>
 </template>
 
