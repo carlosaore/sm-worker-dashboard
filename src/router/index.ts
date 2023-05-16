@@ -1,15 +1,15 @@
 import { createRouter, createWebHistory } from "vue-router";
-import { useAuthStore } from "@/store/auth.store";
+import { useAuthStore } from "@/store";
 import Home from "@/views/Home.vue";
 import ResetPassword from "@/views/ResetPassword.vue";
 import Login from "@/views/Login.vue";
-import IncomingAll from "@/views/IncomingAll.vue";
-import OutgoingAll from "@/views/OutgoingAll.vue";
+import ArrivalsAll from "@/views/ArrivalsAll.vue";
+import DeparturesAll from "@/views/DeparturesAll.vue";
 import Notifications from "@/views/Notifications.vue";
 import Profile from "@/views/Profile.vue";
 import BerthsAll from "@/views/BerthsAll.vue";
-import IncomingOne from "@/views/IncomingOne.vue";
-import OutgoingOne from "@/views/OutgoingOne.vue";
+import ArrivalsOne from "@/views/ArrivalsOne.vue";
+import DeparturesOne from "@/views/DeparturesOne.vue";
 
 const routes = [
   {
@@ -23,23 +23,23 @@ const routes = [
   },
   {
     path: "/entradas",
-    name: "incomingAll",
-    component: IncomingAll,
+    name: "arrivalsAll",
+    component: ArrivalsAll,
   },
   {
     path: "/entradas/:id",
-    name: "incomingOne",
-    component: IncomingOne,
+    name: "arrivalsOne",
+    component: ArrivalsOne,
   },
   {
     path: "/salidas",
-    name: "outgoingAll",
-    component: OutgoingAll,
+    name: "departuresAll",
+    component: DeparturesAll,
   },
   {
     path: "/salidas/:id",
-    name: "outgoingOne",
-    component: OutgoingOne,
+    name: "departuresOne",
+    component: DeparturesOne,
   },
   {
     path: "/amarres",

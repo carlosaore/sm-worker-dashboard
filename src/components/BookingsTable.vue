@@ -2,6 +2,7 @@
 import { Booking } from "@/types";
 import { getLanguageString } from "@/utils";
 import BookingRowAction from "@/components/BookingRowAction.vue";
+import { SM_INDIGO } from "@/config";
 
 interface Props {
   bookings: Booking[];
@@ -87,8 +88,8 @@ const headers: Headers = [
       <template v-for="(header, index) in headers" :key="header.text">
         <th :class="index === headers.length - 1 ? 'last-column' : ''">
           <div class="d-flex flex-column align-center justify-center">
-            <v-icon color="blue-darken-4" v-if="header.icon">{{ header.icon }}</v-icon>
-            <span class="text-caption">{{ header.text }}</span>
+            <v-icon :color="SM_INDIGO" v-if="header.icon">{{ header.icon }}</v-icon>
+            <span class="text-overline text-sm-indigo">{{ header.text }}</span>
           </div>
         </th>
       </template>
@@ -97,7 +98,7 @@ const headers: Headers = [
     <tbody>
     <tr v-for="booking in props.bookings" :key="booking.id">
       <td class="text-center">
-        <v-chip color="orange" size="small">
+        <v-chip color="orange" size="small" label>
           {{ booking.berth.name }}
         </v-chip>
       </td>

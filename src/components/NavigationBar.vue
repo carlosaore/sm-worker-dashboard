@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
 import router from "@/router";
-import { useAuthStore } from "@/store/auth.store";
+import { useAuthStore } from "@/store";
+import { SM_BLUE } from "@/config";
 const { logout } = useAuthStore();
 
 const drawerActive = ref(false);
@@ -24,18 +25,18 @@ const title = computed(() => {
   switch (currentRoute.value.name) {
     case "home":
       return "Inicio";
-    case "outgoingAll":
+    case "departuresAll":
       return "Reservas salientes";
-    case "outgoingOne":
-      return "";
-    case "incomingAll":
+    case "departuresOne":
+      return "Salida";
+    case "arrivalsAll":
       return "Reservas entrantes";
-    case "incomingOne":
-      return "";
+    case "arrivalsOne":
+      return "Entrada";
     case "berthsAll":
       return "Amarres libres";
     case "berthsOne":
-      return "";
+      return "Amarre";
     case "notifications":
       return "Notificaciones";
     case "profile":
@@ -47,7 +48,7 @@ const title = computed(() => {
 </script>
 
 <template>
-  <v-app-bar color="#002b5a" density="compact">
+  <v-app-bar :color="SM_BLUE" density="compact">
     <v-app-bar-nav-icon color="white" @click="toggleDrawer"></v-app-bar-nav-icon>
     <v-toolbar-title class="text-white">{{ title }}</v-toolbar-title>
     <v-spacer></v-spacer>
@@ -64,15 +65,15 @@ const title = computed(() => {
       <v-list-item
         prepend-icon="mdi-import"
         title="Entradas"
-        value="incoming"
-        :active="currentRoute.name === 'incomingAll'"
+        value="arrivals"
+        :active="currentRoute.name === 'arrivalsAll'"
         @click="handleNavigation('/entradas')"
       ></v-list-item>
       <v-list-item
         prepend-icon="mdi-export"
         title="Salidas"
-        value="outgoing"
-        :active="currentRoute.name === 'outgoingAll'"
+        value="departures"
+        :active="currentRoute.name === 'departuresAll'"
         @click="handleNavigation('/salidas')"
       ></v-list-item>
       <v-list-item

@@ -10,6 +10,7 @@ import { getBookings } from "@/services";
 import BookingsTable from "@/components/BookingsTable.vue";
 import SkeletonLoader from "@/components/SkeletonLoader.vue";
 import ErrorModal from "@/components/ErrorModal.vue";
+import { SM_INDIGO } from "@/config";
 
 const loginError = ref({
   isActive: false,
@@ -108,7 +109,7 @@ const closeFilterDialog = () => {
             <FilterChips :appliedFilters="appliedFilters" @remove-filter="removeFilter" />
           </v-col>
           <v-col cols="auto">
-            <v-btn color="primary" size="small" variant="text" prepend-icon="mdi-filter">
+            <v-btn :color="SM_INDIGO" size="small" variant="text" prepend-icon="mdi-filter">
               Filtrar
               <v-dialog v-model="filterDialogActive" activator="parent" width="auto">
                 <FilterDialogContent

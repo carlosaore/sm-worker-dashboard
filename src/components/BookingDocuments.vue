@@ -1,5 +1,6 @@
 <script setup lang="ts">
 
+import { SM_INDIGO } from "@/config";
 </script>
 
 <template>
@@ -7,25 +8,25 @@
   <v-card-text>
     <v-row no-gutters justify="space-between" align="center">
       <v-col cols="auto">
-        <span>Doc. de identidad</span>
+        <span>Documento de identidad</span>
       </v-col>
       <v-spacer></v-spacer>
       <v-col cols="auto">
         <v-btn-group>
-          <v-btn icon="mdi-eye" size="x-small" color="blue-darken-2" variant="text"></v-btn>
-          <v-btn icon="mdi-download" size="x-small" color="green-darken-2" variant="text"></v-btn>
+          <v-btn prepend-icon="mdi-download" size="x-small" :color="SM_INDIGO" variant="text">Descargar</v-btn>
+          <v-btn prepend-icon="mdi-eye" size="x-small" color="blue-darken-2" variant="text">Ver</v-btn>
         </v-btn-group>
       </v-col>
     </v-row>
     <v-row no-gutters justify="space-between" align="center">
       <v-col cols="auto">
-        <span>Doc. del barco</span>
+        <span>Documento del barco</span>
       </v-col>
       <v-spacer></v-spacer>
       <v-col cols="auto">
         <v-btn-group>
-          <v-btn icon="mdi-eye" size="x-small" color="blue-darken-2" variant="text"></v-btn>
-          <v-btn icon="mdi-download" size="x-small" color="green-darken-2" variant="text"></v-btn>
+          <v-btn prepend-icon="mdi-download" size="x-small" :color="SM_INDIGO" variant="text">Descargar</v-btn>
+          <v-btn prepend-icon="mdi-eye" size="x-small" color="blue-darken-2" variant="text">Ver</v-btn>
         </v-btn-group>
       </v-col>
     </v-row>
@@ -36,8 +37,8 @@
       <v-spacer></v-spacer>
       <v-col cols="auto">
         <v-btn-group>
-          <v-btn icon="mdi-eye" size="x-small" color="blue-darken-2" variant="text"></v-btn>
-          <v-btn icon="mdi-download" size="x-small" color="green-darken-2" variant="text"></v-btn>
+          <v-btn prepend-icon="mdi-download" size="x-small" :color="SM_INDIGO" variant="text">Descargar</v-btn>
+          <v-btn prepend-icon="mdi-eye" size="x-small" color="blue-darken-2" variant="text">Ver</v-btn>
         </v-btn-group>
       </v-col>
     </v-row>
@@ -48,8 +49,8 @@
       <v-spacer></v-spacer>
       <v-col cols="auto">
         <v-btn-group>
-          <v-btn icon="mdi-eye" size="x-small" color="blue-darken-2" variant="text"></v-btn>
-          <v-btn icon="mdi-download" size="x-small" color="green-darken-2" variant="text"></v-btn>
+          <v-btn prepend-icon="mdi-download" size="x-small" :color="SM_INDIGO" variant="text">Descargar</v-btn>
+          <v-btn prepend-icon="mdi-eye" size="x-small" color="blue-darken-2" variant="text">Ver</v-btn>
         </v-btn-group>
       </v-col>
     </v-row>
@@ -60,8 +61,8 @@
       <v-spacer></v-spacer>
       <v-col cols="auto">
         <v-btn-group>
-          <v-btn icon="mdi-eye" size="x-small" color="blue-darken-2" variant="text"></v-btn>
-          <v-btn icon="mdi-download" size="x-small" color="green-darken-2" variant="text"></v-btn>
+          <v-btn prepend-icon="mdi-download" size="x-small" :color="SM_INDIGO" variant="text">Descargar</v-btn>
+          <v-btn prepend-icon="mdi-eye" size="x-small" color="blue-darken-2" variant="text">Ver</v-btn>
         </v-btn-group>
       </v-col>
     </v-row>

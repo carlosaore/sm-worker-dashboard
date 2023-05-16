@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { getDaysBetweenDates } from "@/utils";
+
 interface Props {
   date_ini: string;
   date_end: string;
@@ -40,7 +42,7 @@ const dateEnd = getDateProps(props.date_end);
     <v-card-text>
       <v-row align="center">
         <v-col cols="12" sm="12" md="6" lg="6" xl="6" xxl="6">
-          <div id="booking-dates">
+          <div id="booking-dates" class="mb-2">
             <span class="text-h4 text-blue">{{ dateIni.day }}</span>
             <span class="text-overline day" :data-content="`${dateIni.month} ${dateIni.year}`">
               {{ dateIni.weekday }}
@@ -54,6 +56,8 @@ const dateEnd = getDateProps(props.date_end);
               {{ dateIni.weekday }}
             </span>
           </div>
+          <v-chip class="mr-2" color="orange" size="small" prepend-icon="mdi-pier" label>{{ berth_name }}</v-chip>
+          <v-chip color="grey" size="small" prepend-icon="mdi-calendar" label>{{ getDaysBetweenDates(date_ini, date_end, true) }}</v-chip>
         </v-col>
         <v-col cols="6" sm="6" md="3" lg="3" xl="3" xxl="3">
           <div id="booking-details">

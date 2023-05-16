@@ -56,10 +56,10 @@ const {
         Refrescar
       </v-btn>
       <v-btn
-        variant="text"
+        variant="elevated"
         size="small"
         prepend-icon="mdi-refresh"
-        color="primary"
+        color="secondary"
         @click="router.push('/salidas')"
       >
         Ver todas

@@ -3,7 +3,7 @@ import CommonViewWrapper from "@/components/CommonViewWrapper.vue";
 import { useRoute } from "vue-router";
 import BookingHeaderRow from "@/components/BookingHeaderRow.vue";
 import { useQuery } from "@tanstack/vue-query";
-import { getBookingById } from "@/services/getBookingById";
+import { getBookingById } from "@/services";
 import SkeletonLoader from "@/components/SkeletonLoader.vue";
 import BookingCaptain from "@/components/BookingCaptain.vue";
 import BookingDocuments from "@/components/BookingDocuments.vue";
@@ -37,7 +37,7 @@ const { isSuccess, data } = useQuery({
             :draft="data.data.data.ship.draft"
           />
         </v-col>
-        <v-col cols="6" sm="6" md="6" lg="6" xl="3" xxl="3">
+        <v-col cols="12" sm="12" md="6" lg="6" xl="3" xxl="3">
           <BookingCaptain
             :name="data.data.data.user.name"
             :lastname="data.data.data.user.lastname"
@@ -47,7 +47,7 @@ const { isSuccess, data } = useQuery({
             :language="data.data.data.user.language"
           />
         </v-col>
-        <v-col cols="6" sm="6" md="6" lg="6" xl="3" xxl="3">
+        <v-col cols="12" sm="12" md="6" lg="6" xl="3" xxl="3">
           <BookingDocuments />
         </v-col>
       </v-row>

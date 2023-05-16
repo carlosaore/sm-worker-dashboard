@@ -14,6 +14,6 @@ const handleGoToBooking = () => {
 
 <template>
   <v-btn-group>
-    <v-btn icon="mdi-eye" @click="handleGoToBooking" color="primary" variant="text"></v-btn>
+    <v-btn icon="mdi-eye" @click="handleGoToBooking" color="blue-darken-2" variant="text"></v-btn>
   </v-btn-group>
 </template>

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useAuthStore } from "@/store/auth.store";
+import { useAuthStore } from "@/store";
 import { ref } from "vue";
 import { useMutation } from "@tanstack/vue-query";
 import { login } from "@/services";

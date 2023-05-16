@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Booking } from "@/types";
 import router from "@/router";
+import { SM_INDIGO } from "@/config";
 
 interface Props {
   bookings: Booking[];
@@ -23,6 +24,8 @@ const parseDateIntoCompactDate = (date: string): string => {
     year: (parsedDate.getFullYear() !== new Date().getFullYear()) ? "numeric" : undefined,
   });
 };
+
+
 
 const headers: Headers = [
   {
@@ -67,8 +70,8 @@ const handleRowClick = (id: number) => {
       <tr>
         <th v-for="header in headers" :key="header.text">
           <div class="d-flex flex-column align-center justify-center">
-            <v-icon color="blue-darken-2" v-if="header.icon">{{ header.icon }}</v-icon>
-            <span class="text-caption">{{ header.text }}</span>
+            <v-icon :color="SM_INDIGO" v-if="header.icon">{{ header.icon }}</v-icon>
+            <span class="text-overline text-sm-indigo">{{ header.text }}</span>
           </div>
         </th>
       </tr>
@@ -76,7 +79,7 @@ const handleRowClick = (id: number) => {
     <tbody>
       <tr v-for="booking in props.bookings" :key="booking.id" @click="handleRowClick(booking.id)" class="clickable-row">
         <td class="text-center">
-          <v-chip color="orange" size="small">
+          <v-chip color="orange" size="small" label>
             {{ booking.berth.name }}
           </v-chip>
         </td>

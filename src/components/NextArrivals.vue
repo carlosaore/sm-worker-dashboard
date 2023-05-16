@@ -52,7 +52,7 @@ const {
 
 <template>
   <v-card
-    title="Próximas reservas"
+    title="Próximas entradas"
     :loading="isLoading"
     :subtitle="`Hora de la última actualización: ${updatedAt}`"
     prepend-icon="mdi-import"
@@ -73,10 +73,10 @@ const {
         Refrescar
       </v-btn>
       <v-btn
-        variant="text"
+        variant="elevated"
         size="small"
         prepend-icon="mdi-refresh"
-        color="primary"
+        color="secondary"
         @click="router.push('/entradas')"
       >
         Ver todas

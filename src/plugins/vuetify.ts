@@ -10,6 +10,7 @@ import "vuetify/styles";
 
 // Composables
 import { createVuetify } from "vuetify";
+import { SM_BLUE, SM_INDIGO } from "@/config";
 
 // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
 export default createVuetify({
@@ -17,8 +18,8 @@ export default createVuetify({
     themes: {
       light: {
         colors: {
-          primary: "#1867C0",
-          secondary: "#5CBBF6",
+          primary: SM_BLUE,
+          secondary: SM_INDIGO,
         },
       },
     },
