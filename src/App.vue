@@ -57,4 +57,8 @@ html {
 .text-sm-grey {
   color: var(--sm-grey);
 }
+
+.wrapper--full-height-min {
+  min-height: 100%;
+}
 </style>

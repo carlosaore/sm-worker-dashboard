@@ -4,7 +4,7 @@ import { SM_INDIGO } from "@/config";
 </script>
 
 <template>
-<v-card title="Documentos">
+<v-card title="Documentos" append-icon="mdi-file-document-multiple">
   <v-card-text>
     <v-row no-gutters justify="space-between" align="center">
       <v-col cols="auto">

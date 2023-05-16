@@ -6,6 +6,7 @@ import { SM_INDIGO } from "@/config";
 interface Props {
   bookings: Booking[];
   pathPrefix: string;
+  type: "arrivals" | "departures";
 }
 
 const props = defineProps<Props>();
@@ -21,11 +22,9 @@ const parseDateIntoCompactDate = (date: string): string => {
     month: "short",
     day: "2-digit",
     // add year if needed
-    year: (parsedDate.getFullYear() !== new Date().getFullYear()) ? "numeric" : undefined,
+    year: parsedDate.getFullYear() !== new Date().getFullYear() ? "numeric" : undefined,
   });
 };
-
-
 
 const headers: Headers = [
   {
@@ -36,26 +35,15 @@ const headers: Headers = [
     text: "Embarcación",
     icon: "mdi-sail-boat",
   },
-  {
-    text: "Navegante",
-    icon: "mdi-account-tie-hat",
-  },
-  {
-    text: "Inicio",
-    icon: "mdi-clock-start",
-  },
-  {
-    text: "Fin",
-    icon: "mdi-clock-end",
-  },
-  {
-    text: "Arribo",
-    icon: "mdi-clock-in",
-  },
-  {
-    text: "Partida",
-    icon: "mdi-clock-out",
-  },
+  props.type === "arrivals"
+    ? {
+        text: "Inicio",
+        icon: "mdi-clock-start",
+      }
+    : {
+        text: "Fin",
+        icon: "mdi-clock-end",
+      },
 ];
 
 const handleRowClick = (id: number) => {
@@ -65,7 +53,7 @@ const handleRowClick = (id: number) => {
 </script>
 
 <template>
-  <v-table class="overflow-x-auto">
+  <v-table class="overflow-x-auto" hover fixed-header height="30vh">
     <thead>
       <tr>
         <th v-for="header in headers" :key="header.text">
@@ -83,34 +71,22 @@ const handleRowClick = (id: number) => {
             {{ booking.berth.name }}
           </v-chip>
         </td>
-        <td class="text-center">
+        <td class="d-flex flex-column align-center">
           <v-chip variant="text" size="small">
             {{ booking.ship.name }}
           </v-chip>
-        </td>
-        <td class="text-center">
           <v-chip variant="text" size="small">
-            {{ booking.user.name }} {{ booking.user.lastname }}
+            {{ booking.ship.target }}
           </v-chip>
         </td>
-        <td class="text-center">
+        <td v-if="type === 'arrivals'" class="text-center">
           <v-chip variant="text" size="small">
             {{ parseDateIntoCompactDate(booking.date_ini) }}
           </v-chip>
         </td>
-        <td class="text-center">
+        <td v-else class="text-center">
           <v-chip variant="text" size="small">
             {{ parseDateIntoCompactDate(booking.date_end) }}
-          </v-chip>
-        </td>
-        <td class="text-center">
-          <v-chip variant="text" size="small">
-            {{ booking.arrived_at || "-" }}
-          </v-chip>
-        </td>
-        <td class="text-center">
-          <v-chip variant="text" size="small">
-            {{ booking.departured_at || "-" }}
           </v-chip>
         </td>
       </tr>
@@ -122,7 +98,8 @@ const handleRowClick = (id: number) => {
 .clickable-row {
   cursor: pointer;
 }
-.clickable-row:hover {
-  background-color: #f5f5f5;
+
+.clickable-row * {
+  cursor: pointer;
 }
 </style>

@@ -29,6 +29,7 @@ const { isSuccess, data } = useQuery({
             :light="Boolean(data.data.data.berth.light)"
             :water="Boolean(data.data.data.berth.water)"
             :ship_name="data.data.data.ship.name"
+            :target="data.data.data.ship.target"
             :user_name="data.data.data.user.name"
             :user_lastname="data.data.data.user.lastname"
             :validated="Boolean(data.data.data.validated)"

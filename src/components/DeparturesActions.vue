@@ -66,22 +66,13 @@ import { SM_INDIGO } from "@/config";
         </v-col>
       </v-row>
       <v-row justify="space-between">
-        <v-col cols="6">
-          <v-btn block size="small"> Acción 1 </v-btn>
-        </v-col>
-        <v-col cols="6">
-          <v-btn block size="small"> Acción 2 </v-btn>
+        <v-col cols="12">
+          <v-btn block color="primary">Confirmar Salida</v-btn>
         </v-col>
         <v-col cols="12">
-          <v-btn color="warning" block prepend-icon="mdi-alert-circle"> Reportar problema </v-btn>
+          <v-btn variant="text" color="warning" block prepend-icon="mdi-alert-circle"> Reportar problema </v-btn>
         </v-col>
       </v-row>
     </v-card-text>
   </v-card>
 </template>
-
-<style>
-#booking-actions-wrapper {
-  min-height: 100%;
-}
-</style>

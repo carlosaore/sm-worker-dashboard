@@ -9,11 +9,11 @@ interface Props {
   language: string;
   country_phone_iso2: string | null;
 }
-const props = defineProps<Props>();
+defineProps<Props>();
 </script>
 
 <template>
-  <v-card title="Navegante" id="captain-card">
+  <v-card title="Navegante" class="wrapper--full-height-min" append-icon="mdi-account-tie-hat">
     <v-card-text>
       <p class="my-6" data-content="Nombre y apellidos">{{ name }} {{ lastname }}</p>
       <p class="mb-6" data-content="Email">{{ email }}</p>
@@ -24,10 +24,6 @@ const props = defineProps<Props>();
 </template>
 
 <style scoped>
-#captain-card {
-  min-height: 100%;
-}
-
 p {
   position: relative;
 }

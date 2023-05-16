@@ -19,7 +19,6 @@ const {
     getBookings({
       type: "departures",
       page: 1,
-      limit: 5,
     }),
   refetchInterval: 60000, // 1 minute in milliseconds (modify to your needs)
   keepPreviousData: true,
@@ -41,7 +40,7 @@ const {
     prepend-icon="mdi-export"
   >
     <v-card-text>
-      <ReadOnlyBookingsTable v-if="isSuccess" :bookings="getBookingsData.data.data" path-prefix="/salidas" />
+      <ReadOnlyBookingsTable v-if="isSuccess" :bookings="getBookingsData.data.data" path-prefix="/salidas"  type="departures"/>
       <SkeletonLoader v-else height="150" />
     </v-card-text>
     <v-card-actions>

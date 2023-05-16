@@ -26,15 +26,15 @@ const title = computed(() => {
     case "home":
       return "Inicio";
     case "departuresAll":
-      return "Reservas salientes";
+      return "Salidas";
     case "departuresOne":
       return "Salida";
     case "arrivalsAll":
-      return "Reservas entrantes";
+      return "Entradas";
     case "arrivalsOne":
       return "Entrada";
     case "berthsAll":
-      return "Amarres libres";
+      return "Amarres";
     case "berthsOne":
       return "Amarre";
     case "notifications":
@@ -51,7 +51,6 @@ const title = computed(() => {
   <v-app-bar :color="SM_BLUE" density="compact">
     <v-app-bar-nav-icon color="white" @click="toggleDrawer"></v-app-bar-nav-icon>
     <v-toolbar-title class="text-white">{{ title }}</v-toolbar-title>
-    <v-spacer></v-spacer>
     <v-btn variant="text" icon="mdi-arrow-left" @click="router.go(-1)" color="white"></v-btn>
     <v-btn variant="text" @click="router.push('/notificaciones')" color="white">
       <v-badge dot :model-value="dummyNotificationsCount > 0" color="error">
