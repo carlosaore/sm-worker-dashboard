@@ -28,7 +28,7 @@ import { GetBookingsQueryParams, GetBookingsResponse, RealGetBookingsQueryParams
 
 /**
  * GET request to API to get bookings
- * By default, it will get bookings from the current date minus 1 day at 00:00:00 to the current date plus 1 day at 23:59:59
+ * By default, it will get bookings from the current date minus 1 day at 00:00:00 to the current date plus 1 day at 23:59:59 TODO: unknown api behaviour, so we can't implement this yet
  * If a type of booking is provided, it will get bookings of that type (arrivals or departures) and override the default date filters
  * - Arrivals means date_ini between yesterday at 00:00:00 and tomorrow at 23:59:59, and no date_end (TODO: unknown api behaviour, so we can't implement this yet)
  * - Departures means date_end between yesterday at 00:00:00 and tomorrow at 23:59:59, and no date_ini (TODO: unknown api behaviour, so we can't implement this yet)

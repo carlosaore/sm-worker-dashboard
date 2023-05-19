@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <v-container id="common-view-wrapper" fluid class="fill-height bg-grey-lighten-2 d-flex align-start">
+  <v-container id="common-view-wrapper" fluid class="fill-height bg-grey-lighten-4 d-flex align-start">
     <slot></slot>
   </v-container>
 </template>

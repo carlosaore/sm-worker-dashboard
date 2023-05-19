@@ -51,7 +51,7 @@ const getBookingsQueryParams = computed<GetBookingsQueryParams>(() => {
   return params;
 });
 
-const { isSuccess, data } = useQuery({
+const { isSuccess, data, isLoading } = useQuery({
   queryKey: ["getBookings", getBookingsQueryParams],
   queryFn: ({ queryKey }) => getBookings(queryKey[1]),
   refetchInterval: 60000, // 1 minute in milliseconds (modify to your needs)
@@ -102,7 +102,7 @@ const closeFilterDialog = () => {
 
 <template>
   <CommonViewWrapper>
-    <v-card>
+    <v-card min-width="100%" :loading="isLoading">
       <v-card-title>
         <v-row>
           <v-col>
@@ -126,7 +126,7 @@ const closeFilterDialog = () => {
         </v-row>
       </v-card-title>
       <v-card-text>
-        <BookingsTable v-if="isSuccess" :bookings="data.data.data" path-prefix="/salidas" />
+        <BookingsTable v-if="isSuccess" :bookings="data.data.data" path-prefix="/salidas" type="departures" />
         <SkeletonLoader v-else height="600" />
       </v-card-text>
       <v-card-actions v-if="isSuccess && data.data.items">

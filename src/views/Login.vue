@@ -34,7 +34,7 @@ const { isLoading, mutateAsync } = useMutation({
   onError: (error) => {
     loginError.value = {
       isActive: true,
-      title: "Error",
+      title: "Error al iniciar sesión",
       message: error.message,
     };
   },
@@ -62,7 +62,7 @@ const onPasswordForgot = () => {
   <v-container fluid class="fill-height bg-blue-darken-4">
     <v-responsive>
       <v-sheet elevation="5" rounded id="login_wrapper">
-        <v-card class="pa-6">
+        <v-card class="pa-6" :loading="isLoading">
           <v-img class="mx-auto mb-6" height="100px" src="/src/assets/full-logo-blue.png"></v-img>
           <v-form @submit.prevent="onFinish" v-model="valid">
             <v-text-field

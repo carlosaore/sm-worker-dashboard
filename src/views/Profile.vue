@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import CommonViewWrapper from "@/components/CommonViewWrapper.vue";
 import WorkerInfo from "@/components/WorkerInfo.vue";
-import ResetPassword from "@/components/ResetPassword.vue";
+import ResetPasswordCard from "@/components/ResetPasswordCard.vue";
 </script>
 
 <template>
@@ -11,7 +11,7 @@ import ResetPassword from "@/components/ResetPassword.vue";
         <WorkerInfo />
       </v-col>
       <v-col cols="12" sm="6" md="6" lg="6" xl="6" xxl="6">
-        <ResetPassword />
+        <ResetPasswordCard />
       </v-col>
     </v-row>
   </CommonViewWrapper>

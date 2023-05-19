@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { useAuthStore } from "@/store";
 import Home from "@/views/Home.vue";
-import ResetPassword from "@/views/ResetPassword.vue";
+import ResetPasswordView from "@/views/ForgotPasswordView.vue";
 import Login from "@/views/Login.vue";
 import ArrivalsAll from "@/views/ArrivalsAll.vue";
 import DeparturesAll from "@/views/DeparturesAll.vue";
@@ -64,7 +64,7 @@ const routes = [
   {
     path: "/reset-password",
     name: "resetPassword",
-    component: ResetPassword,
+    component: ResetPasswordView,
   },
 ];
 

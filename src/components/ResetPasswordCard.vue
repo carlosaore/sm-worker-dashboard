@@ -1,5 +1,11 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
+import { useMutation } from "@tanstack/vue-query";
+import { resetPassword } from "@/services";
+import ErrorModal from "@/components/ErrorModal.vue";
+import { useAuthStore } from "@/store";
+
+const { logout } = useAuthStore();
 
 const formValid = ref(false);
 
@@ -13,26 +19,48 @@ const show1 = ref(false);
 const show2 = ref(false);
 const show3 = ref(false);
 
-const errorMessages = computed(() => {
+const passwordErrorMessages = computed(() => {
   if (user.value.password !== user.value.password_confirmation) {
     return "La nueva contraseña y su confirmación no coinciden";
   }
   return "";
 });
 
+const resetPasswordError = ref({
+  isActive: false,
+  title: "",
+  message: "",
+});
+const closeErrorModal = () => {
+  resetPasswordError.value.isActive = false;
+};
+
+const { mutate, isSuccess } = useMutation({
+  mutationKey: ["resetPassword"],
+  mutationFn: resetPassword,
+  onError: (error) => {
+    resetPasswordError.value = {
+      isActive: true,
+      title: "Error al cambiar la contraseña",
+      message: error.message,
+    };
+  },
+});
+
 const onFinish = () => {
   if (formValid.value) {
-    console.log("onFinish valid");
-    return;
+    mutate({
+      current_password: user.value.current_password,
+      new_password: user.value.password,
+    });
   }
-  console.log("onFinish invalid");
 };
 </script>
 
 <template>
   <v-card title="Cambiar contraseña" append-icon="mdi-lock-question">
     <v-card-text>
-      <v-form v-model="formValid" @submit.prevent="onFinish">
+      <v-form v-if="!isSuccess" v-model="formValid" @submit.prevent="onFinish">
         <v-text-field
           outlined
           color="primary"
@@ -83,12 +111,23 @@ const onFinish = () => {
             (v) => v.length >= 8 || 'La contraseña debe tener al menos 8 caracteres',
             (v) => v.length <= 40 || 'La contraseña debe tener máximo 40 caracteres',
           ]"
-          :error-messages="errorMessages"
+          :error-messages="passwordErrorMessages"
         ></v-text-field>
         <v-btn type="submit" block color="primary" :loading="false" class="mt-6" prepend-icon="mdi-content-save">
           Guardar
         </v-btn>
       </v-form>
+      <v-alert v-else dense type="success" icon="mdi-check-circle-outline">
+        <p>Contraseña cambiada correctamente</p>
+        <p>Por favor vuelve a iniciar sesión</p>
+        <v-btn class="mt-6" block variant="outlined" @click="logout"> Iniciar sesión </v-btn>
+      </v-alert>
     </v-card-text>
   </v-card>
+  <ErrorModal
+    :isActive="resetPasswordError.isActive"
+    :title="resetPasswordError.title"
+    :message="resetPasswordError.message"
+    @close-error-modal="closeErrorModal"
+  />
 </template>

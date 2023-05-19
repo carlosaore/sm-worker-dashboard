@@ -13,21 +13,19 @@ const workerString = computed(() => {
 </script>
 
 <template>
-  <v-footer class="bg-grey" id="footer">
-    <v-responsive class="pa-3">
-      <v-row align="center" justify="center">
-        <v-col class="text-center pa-0">
-          <span class="text-caption text-white">
-            Logueado como: {{ workerString }}
-          </span>
-        </v-col>
-      </v-row>
-    </v-responsive>
+  <v-footer id="footer">
+    <p class="text-footer text-sm-indigo">Logueado como: {{ workerString }}</p>
   </v-footer>
 </template>
 
 <style scoped>
 #footer {
-  max-height: 40px;
+  max-height: 30px;
+}
+
+.text-footer {
+  font-size: 0.7rem;
+  text-align: center;
+  width: 100%;
 }
 </style>
