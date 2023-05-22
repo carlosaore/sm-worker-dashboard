@@ -2,7 +2,6 @@
 import { computed, ref } from "vue";
 import router from "@/router";
 import { useAuthStore } from "@/store";
-import { SM_BLUE } from "@/config";
 const { logout } = useAuthStore();
 
 const drawerActive = ref(false);
@@ -48,7 +47,7 @@ const title = computed(() => {
 </script>
 
 <template>
-  <v-app-bar :color="SM_BLUE" density="compact">
+  <v-app-bar color="primary" density="compact">
     <v-app-bar-nav-icon color="white" @click="toggleDrawer"></v-app-bar-nav-icon>
     <v-toolbar-title class="text-white">{{ title }}</v-toolbar-title>
     <v-btn variant="text" icon="mdi-arrow-left" @click="router.go(-1)" color="white"></v-btn>

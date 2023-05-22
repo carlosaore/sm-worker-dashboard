@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Booking } from "@/types";
 import { SM_INDIGO } from "@/config";
+import router from "@/router";
 
 interface Props {
   bookings: Booking[];
@@ -43,14 +44,19 @@ const headers: Headers = [
       icon: "mdi-clock-end",
     },
 ];
+
+const handleRowClick = (id: number) => {
+  const url = `${props.pathPrefix}/${id}`;
+  router.push(url);
+};
 </script>
 
 <template>
-  <v-table>
+  <v-table density="comfortable" hover>
     <thead>
     <tr>
       <template v-for="header in headers" :key="header.text">
-        <th>
+        <th class="px-0">
           <div class="d-flex flex-column align-center justify-center">
             <v-icon :color="SM_INDIGO" v-if="header.icon">{{ header.icon }}</v-icon>
             <span class="text-overline text-sm-indigo">{{ header.text }}</span>
@@ -60,13 +66,13 @@ const headers: Headers = [
     </tr>
     </thead>
     <tbody>
-    <tr v-for="booking in props.bookings" :key="booking.id">
-      <td class="text-center">
+    <tr v-for="booking in props.bookings" :key="booking.id" @click="handleRowClick(booking.id)">
+      <td class="text-center px-0">
         <v-chip color="orange" size="small" label>
           {{ booking.berth.name }}
         </v-chip>
       </td>
-      <td class="d-flex flex-column align-center">
+      <td class="d-flex flex-column align-center px-0">
         <v-chip variant="text" size="small">
           {{ booking.ship.name }}
         </v-chip>
@@ -74,12 +80,12 @@ const headers: Headers = [
           {{ booking.ship.target }}
         </v-chip>
       </td>
-      <td v-if="type === 'arrivals'" class="text-center">
+      <td v-if="type === 'arrivals'" class="text-center px-0">
         <v-chip variant="text" size="small">
           {{ parseDateIntoCompactDate(booking.date_ini) }}
         </v-chip>
       </td>
-      <td v-else class="text-center">
+      <td v-else class="text-center px-0">
         <v-chip variant="text" size="small">
           {{ parseDateIntoCompactDate(booking.date_end) }}
         </v-chip>
@@ -90,11 +96,11 @@ const headers: Headers = [
 </template>
 
 <style scoped>
-/* last column is always visible, and it has a left drop shadow */
+/* last column is always visible, and it has a left drop shadow
 .last-column {
   position: sticky;
   right: 0;
   background-color: white;
   min-width: 100px;
-}
+}*/
 </style>

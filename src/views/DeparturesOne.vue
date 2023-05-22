@@ -23,6 +23,7 @@ const { isSuccess, data } = useQuery({
       <v-row align-content="start">
         <v-col cols="12">
           <BookingHeaderRow
+            :isSuccess="isSuccess"
             :berth_name="data.data.data.berth.name"
             :date_end="data.data.data.date_end"
             :date_ini="data.data.data.date_ini"
@@ -40,6 +41,7 @@ const { isSuccess, data } = useQuery({
         </v-col>
         <v-col cols="12" sm="12" md="6" lg="6" xl="3" xxl="3">
           <BookingCaptain
+            :isSuccess="isSuccess"
             :name="data.data.data.user.name"
             :lastname="data.data.data.user.lastname"
             :phone="data.data.data.user.phone"
@@ -49,10 +51,14 @@ const { isSuccess, data } = useQuery({
           />
         </v-col>
         <v-col cols="12" sm="12" md="6" lg="6" xl="3" xxl="3">
-          <DeparturesActions />
+          <DeparturesActions :isSuccess="isSuccess" />
         </v-col>
       </v-row>
     </template>
-    <SkeletonLoader v-else height="100"/>
+    <template v-else>
+      <SkeletonLoader height="200"/>
+      <SkeletonLoader height="200"/>
+      <SkeletonLoader height="200"/>
+    </template>
   </CommonViewWrapper>
 </template>

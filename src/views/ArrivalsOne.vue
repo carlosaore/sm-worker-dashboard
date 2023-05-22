@@ -7,6 +7,7 @@ import { getBookingById } from "@/services";
 import SkeletonLoader from "@/components/SkeletonLoader.vue";
 import BookingCaptain from "@/components/BookingCaptain.vue";
 import BookingDocuments from "@/components/BookingDocuments.vue";
+import ArrivalsActions from "@/components/ArrivalsActions.vue";
 
 const params = useRoute().params;
 
@@ -51,8 +52,15 @@ const { isSuccess, data } = useQuery({
         <v-col cols="12" sm="12" md="6" lg="6" xl="3" xxl="3">
           <BookingDocuments />
         </v-col>
+        <v-col cols="12">
+          <ArrivalsActions />
+        </v-col>
       </v-row>
     </template>
-    <SkeletonLoader v-else height="100"/>
+    <template v-else>
+      <SkeletonLoader height="200"/>
+      <SkeletonLoader height="200"/>
+      <SkeletonLoader height="200"/>
+    </template>
   </CommonViewWrapper>
 </template>

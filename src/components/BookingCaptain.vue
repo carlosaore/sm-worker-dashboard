@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { getLanguageString } from "@/utils";
+import { SM_BLUE } from "@/config";
 
 interface Props {
   name: string;
@@ -13,7 +14,13 @@ defineProps<Props>();
 </script>
 
 <template>
-  <v-card title="Navegante" class="wrapper--full-height-min" append-icon="mdi-account-tie-hat">
+  <v-card class="wrapper--full-height-min">
+    <template v-slot:title>
+      <span class="text-primary">Navegante</span>
+    </template>
+    <template v-slot:append>
+      <v-icon :color="SM_BLUE">mdi-account-tie-hat</v-icon>
+    </template>
     <v-card-text>
       <p class="my-6" data-content="Nombre y apellidos">{{ name }} {{ lastname }}</p>
       <p class="mb-6" data-content="Email">{{ email }}</p>
@@ -35,6 +42,6 @@ p:before {
   left: 0;
   font-size: 0.75rem;
   font-weight: 400;
-  color: #1976D2;
+  color: var(--sm-indigo);
 }
 </style>

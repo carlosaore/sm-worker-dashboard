@@ -5,5 +5,5 @@ export const SM_BLUE = "#023161" as const;
 export const SM_BLUE_DARK = "#00274C" as const;
 export const SM_BLUE_LIGHT = "#E6F1F8" as const;
 export const SM_ACCENT = "#FCBA2D" as const;
-export const BASE_API_URL = "http://localhost:5000" as const;
+export const BASE_API_URL = "https://mobiledisloyalbackups.carlosaore.repl.co" as const;
 // export const BASE_API_URL = process.env.VUE_APP_BASE_API_URL as string;

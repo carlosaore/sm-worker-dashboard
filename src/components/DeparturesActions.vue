@@ -1,76 +1,92 @@
 <script setup lang="ts">
-import { SM_INDIGO } from "@/config";
+import { SM_GREY, SM_INDIGO } from "@/config";
+import ButtonDialog from "@/components/ButtonDialog.vue";
+import ReportProblem from "@/components/ReportProblem.vue";
+import ConfirmDeparture from "@/components/ConfirmDeparture.vue";
+
+const documents = [
+  {
+    name: "Documento de identidad",
+    key: "id_document",
+  },
+  {
+    name: "Documento del barco",
+    key: "boat_document",
+  },
+  {
+    name: "Seguro del barco",
+    key: "boat_insurance",
+  },
+  {
+    name: "Hoja de entrada",
+    key: "entry_sheet",
+  },
+  {
+    name: "Lista de tripulantes",
+    key: "crew_list",
+  },
+];
+
+const onDownload = (key: string) => {
+  console.log("download", key);
+};
+
+const onPreview = (key: string) => {
+  console.log("preview", key);
+};
 </script>
 
 <template>
   <v-card>
     <v-card-text>
-      <v-row no-gutters justify="space-between" align="center">
+      <v-row v-for="document of documents" no-gutters justify="space-between" align="center" :key="document.key">
         <v-col cols="auto">
-          <span>Documento de identidad</span>
+          <span>{{ document.name }}</span>
         </v-col>
         <v-spacer></v-spacer>
         <v-col cols="auto">
           <v-btn-group>
-            <v-btn prepend-icon="mdi-download" size="x-small" :color="SM_INDIGO" variant="text">Descargar</v-btn>
-            <v-btn prepend-icon="mdi-eye" size="x-small" color="blue-darken-2" variant="text">Ver</v-btn>
-          </v-btn-group>
-        </v-col>
-      </v-row>
-      <v-row no-gutters justify="space-between" align="center">
-        <v-col cols="auto">
-          <span>Documento del barco</span>
-        </v-col>
-        <v-spacer></v-spacer>
-        <v-col cols="auto">
-          <v-btn-group>
-            <v-btn prepend-icon="mdi-download" size="x-small" :color="SM_INDIGO" variant="text">Descargar</v-btn>
-            <v-btn prepend-icon="mdi-eye" size="x-small" color="blue-darken-2" variant="text">Ver</v-btn>
-          </v-btn-group>
-        </v-col>
-      </v-row>
-      <v-row no-gutters justify="space-between" align="center">
-        <v-col cols="auto">
-          <span>Seguro del barco</span>
-        </v-col>
-        <v-spacer></v-spacer>
-        <v-col cols="auto">
-          <v-btn-group>
-            <v-btn prepend-icon="mdi-download" size="x-small" :color="SM_INDIGO" variant="text">Descargar</v-btn>
-            <v-btn prepend-icon="mdi-eye" size="x-small" color="blue-darken-2" variant="text">Ver</v-btn>
-          </v-btn-group>
-        </v-col>
-      </v-row>
-      <v-row no-gutters justify="space-between" align="center">
-        <v-col cols="auto">
-          <span>Hoja de entrada</span>
-        </v-col>
-        <v-spacer></v-spacer>
-        <v-col cols="auto">
-          <v-btn-group>
-            <v-btn prepend-icon="mdi-download" size="x-small" :color="SM_INDIGO" variant="text">Descargar</v-btn>
-            <v-btn prepend-icon="mdi-eye" size="x-small" color="blue-darken-2" variant="text">Ver</v-btn>
-          </v-btn-group>
-        </v-col>
-      </v-row>
-      <v-row no-gutters justify="space-between" align="center">
-        <v-col cols="auto">
-          <span>Lista de tripulación</span>
-        </v-col>
-        <v-spacer></v-spacer>
-        <v-col cols="auto">
-          <v-btn-group>
-            <v-btn prepend-icon="mdi-download" size="x-small" :color="SM_INDIGO" variant="text">Descargar</v-btn>
-            <v-btn prepend-icon="mdi-eye" size="x-small" color="blue-darken-2" variant="text">Ver</v-btn>
+            <v-btn
+              prepend-icon="mdi-download"
+              size="x-small"
+              :color="SM_GREY"
+              variant="text"
+              @click="onDownload(document.key)"
+              >Descargar</v-btn
+            >
+            <v-btn
+              prepend-icon="mdi-eye"
+              size="x-small"
+              :color="SM_INDIGO"
+              variant="text"
+              @click="onPreview(document.key)"
+              >Ver</v-btn
+            >
           </v-btn-group>
         </v-col>
       </v-row>
       <v-row justify="space-between">
         <v-col cols="12">
-          <v-btn block color="primary">Confirmar Salida</v-btn>
+          <ButtonDialog
+            buttonText="Confirmar salida"
+            buttonColor="secondary"
+            buttonVariant="elevated"
+            :allowFullscreen="false"
+          >
+            <ConfirmDeparture />
+          </ButtonDialog>
         </v-col>
         <v-col cols="12">
-          <v-btn variant="text" color="warning" block prepend-icon="mdi-alert-circle"> Reportar problema </v-btn>
+          <ButtonDialog
+            buttonText="Reportar problema"
+            buttonVariant="text"
+            buttonColor="warning"
+            buttonIcon="warning"
+            title="Reportar problema"
+            allowFullscreen
+          >
+            <ReportProblem />
+          </ButtonDialog>
         </v-col>
       </v-row>
     </v-card-text>

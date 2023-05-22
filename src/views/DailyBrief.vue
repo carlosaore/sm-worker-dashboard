@@ -4,6 +4,7 @@ import { ref } from "vue";
 
 const departuresCount = ref(3);
 const arrivalsCount = ref(12);
+const berthsCount = ref(5);
 
 const today = new Date()
   .toLocaleDateString("es-ES", {
@@ -62,7 +63,7 @@ const today = new Date()
             <v-icon size="x-large">mdi-pier</v-icon>
           </template>
           <v-card-text>
-            <div class="text-h2 text-center text-sm-accent">{{ departuresCount }}</div>
+            <div class="text-h2 text-center text-sm-accent">{{ berthsCount }}</div>
           </v-card-text>
         </v-card>
       </v-col>

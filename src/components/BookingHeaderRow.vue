@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { getDaysBetweenDates } from "@/utils";
+import { SM_BLUE, SM_GREY, SM_INDIGO } from "@/config";
 
 interface Props {
   date_ini: string;
@@ -40,39 +41,45 @@ const dateEnd = getDateProps(props.date_end);
 </script>
 
 <template>
-  <v-card title="Detalles de la reserva" append-icon="mdi-calendar-star">
+  <v-card>
+    <template v-slot:title>
+      <span class="text-primary">Detalles de la reserva</span>
+    </template>
+    <template v-slot:append>
+      <v-icon :color="SM_BLUE">mdi-calendar-star</v-icon>
+    </template>
     <v-card-text>
       <v-container fluid class="pl-0">
         <v-row align="start">
           <v-col cols="12" md="6" class="mb-4">
             <div id="booking-dates" class="mb-2">
-              <span class="text-h4 text-blue">{{ dateIni.day }}</span>
-              <span class="text-overline day" :data-content="`${dateIni.month} ${dateIni.year}`">
+              <span class="text-h4 text-secondary">{{ dateIni.day }}</span>
+              <span class="text-overline text-secondary day" :data-content="`${dateIni.month} ${dateIni.year}`">
                 {{ dateIni.weekday }}
               </span>
-              <v-icon icon="mdi-arrow-right" color="blue-darken-2" />
-              <span class="text-h4 text-blue">{{ dateEnd.day }}</span>
-              <span class="text-overline day" :data-content="`${dateEnd.month} ${dateEnd.year}`">
+              <v-icon icon="mdi-arrow-right" size="x-large" :color="SM_GREY" />
+              <span class="text-h4 text-secondary">{{ dateEnd.day }}</span>
+              <span class="text-overline day text-secondary" :data-content="`${dateEnd.month} ${dateEnd.year}`">
                 {{ dateIni.weekday }}
               </span>
             </div>
             <v-chip class="mr-2" color="orange" size="small" prepend-icon="mdi-pier" label>{{ berth_name }}</v-chip>
-            <v-chip color="grey" size="small" prepend-icon="mdi-calendar" label>{{
+            <v-chip :color="SM_GREY" size="small" prepend-icon="mdi-calendar" label>{{
               getDaysBetweenDates(date_ini, date_end, true)
             }}</v-chip>
           </v-col>
           <v-col cols="12" md="3" class="py-0" id="add-bottom-margin">
             <div class="booking-details">
               <p class="text-caption">
-                <v-icon icon="mdi-account-tie-hat" color="blue-darken-2" />
+                <v-icon icon="mdi-account-tie-hat" :color="SM_INDIGO" />
                 {{ user_name }} {{ user_lastname }}
               </p>
               <p class="text-caption">
-                <v-icon icon="mdi-sail-boat" color="blue-darken-2" />
+                <v-icon icon="mdi-sail-boat" :color="SM_INDIGO" />
                 {{ ship_name }} - {{ target }}
               </p>
               <p class="text-caption">
-                <v-icon icon="mdi-ruler" color="blue-darken-2" />
+                <v-icon icon="mdi-ruler" :color="SM_INDIGO" />
                 E {{ length }} - M {{ beam }} - C {{ draft }}
               </p>
             </div>
@@ -86,12 +93,12 @@ const dateEnd = getDateProps(props.date_end);
               <p class="text-caption">
                 <v-icon
                   :icon="light ? 'mdi-lightbulb-on' : 'mdi-lightbulb-off'"
-                  :color="light ? 'blue-darken-2' : 'red'"
+                  :color="light ? SM_INDIGO : 'red'"
                 />
                 Electricidad
               </p>
               <p class="text-caption">
-                <v-icon :icon="light ? 'mdi-water-check' : 'mdi-water-off'" :color="light ? 'blue-darken-2' : 'red'" />
+                <v-icon :icon="light ? 'mdi-water-check' : 'mdi-water-off'" :color="light ? SM_INDIGO : 'red'" />
                 Agua
               </p>
             </div>
@@ -124,7 +131,7 @@ const dateEnd = getDateProps(props.date_end);
   left: 0;
   min-width: 100%;
   width: max-content;
-  color: gray;
+  color: var(--sm-grey);
 }
 
 .booking-details {
