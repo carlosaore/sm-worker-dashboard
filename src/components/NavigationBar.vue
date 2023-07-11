@@ -17,9 +17,6 @@ const handleNavigation = (route: string) => {
   drawerActive.value = false;
 };
 
-// TODO: How will we retrieve the notifications? An endpoint? From User in auth store?
-const dummyNotificationsCount = 1;
-
 const title = computed(() => {
   switch (currentRoute.value.name) {
     case "home":
@@ -51,11 +48,6 @@ const title = computed(() => {
     <v-app-bar-nav-icon color="white" @click="toggleDrawer"></v-app-bar-nav-icon>
     <v-toolbar-title class="text-white">{{ title }}</v-toolbar-title>
     <v-btn variant="text" icon="mdi-arrow-left" @click="router.go(-1)" color="white"></v-btn>
-    <v-btn variant="text" @click="router.push('/notificaciones')" color="white">
-      <v-badge dot :model-value="dummyNotificationsCount > 0" color="error">
-        <v-icon>mdi-bell</v-icon>
-      </v-badge>
-    </v-btn>
     <v-btn variant="text" icon="mdi-home" @click="router.push('/home')" color="white"></v-btn>
   </v-app-bar>
   <v-navigation-drawer v-model="drawerActive" location="top" id="nav_drawer">

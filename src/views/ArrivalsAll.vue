@@ -126,10 +126,10 @@ const closeFilterDialog = () => {
         </v-row>
       </v-card-title>
       <v-card-text class="px-2">
-        <BookingsTable v-if="isSuccess" :bookings="data.data.data" path-prefix="/entradas" type="arrivals" />
+        <BookingsTable v-if="isSuccess && data" :bookings="data.data.data" path-prefix="/entradas" type="arrivals" />
         <SkeletonLoader v-else height="600" />
       </v-card-text>
-      <v-card-actions v-if="isSuccess && data.data.items">
+      <v-card-actions v-if="isSuccess && data && data.data.items">
         <v-spacer></v-spacer>
         <v-pagination
           v-model="page"

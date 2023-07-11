@@ -19,11 +19,10 @@ const { isSuccess, data } = useQuery({
 
 <template>
   <CommonViewWrapper>
-    <template v-if="isSuccess">
+    <template v-if="isSuccess && data">
       <v-row align-content="start">
         <v-col cols="12">
           <BookingHeaderRow
-            v-if="data"
             :isSuccess="isSuccess"
             :berth_name="data.data.data.berth.name"
             :date_end="data.data.data.date_end"
