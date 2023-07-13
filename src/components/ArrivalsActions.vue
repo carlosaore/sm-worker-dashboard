@@ -6,7 +6,7 @@ import ConfirmDocuments from "@/components/ConfirmDocuments.vue";
 </script>
 
 <template>
-  <v-card>
+  <v-card variant="text">
     <v-card-text>
       <v-row justify="space-between">
         <v-col cols="12">

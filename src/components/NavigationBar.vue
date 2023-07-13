@@ -73,13 +73,6 @@ const title = computed(() => {
         :active="currentRoute.name === 'berthsAll'"
         @click="handleNavigation('/amarres')"
       ></v-list-item>
-      <v-list-item
-        prepend-icon="mdi-bell"
-        title="Notificaciones"
-        value="notifications"
-        :active="currentRoute.name === 'notifications'"
-        @click="handleNavigation('/notificaciones')"
-      ></v-list-item>
     </v-list>
     <v-divider></v-divider>
     <v-list>

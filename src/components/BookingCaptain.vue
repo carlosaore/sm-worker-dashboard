@@ -14,7 +14,7 @@ defineProps<Props>();
 </script>
 
 <template>
-  <v-card class="wrapper--full-height-min">
+  <v-card class="wrapper--full-height-min" variant="text">
     <template v-slot:title>
       <span class="text-primary">Navegante</span>
     </template>

@@ -148,44 +148,9 @@ export interface GetBookingsResponse {
   items: number;
 }
 
-/**
- * Query params for getBookings function in services/getBookings.ts
- * May also be used for a filter component in the UI but not for the actual request
- */
-export interface GetBookingsQueryParams {
-  type?: "arrivals" | "departures";
-  page?: number;
-  limit?: number;
-  berth_name?: string;
-  ship_name?: string;
-  target?: string; // "Matricula" ??
-  user_name?: string;
-}
-
-/**
- * This is the real interface for the params that will actually be sent to the API as query params
- * Yes, you read that right, the GetBookingsQueryParams type is only to get the correct params for the getBookings function
- * It's a bit different because we need to calculate stuff depending on stuff, and we like the interface design pattern: No logic in the interface, only in the implementation...
- * (Trust me, I watched the tiktoks, and ate the crayons, I know what I'm doing)
- */
-export type RealGetBookingsQueryParams = {
-  page: string;
-  limit?: string;
-  berth_name?: string;
-  ship_name?: string;
-  target?: string; // "Matricula" ??
-  user_name?: string;
-};
-
-/**
- * An array of Filter objects tied to a form and a display component
- * Intended to ease filter form logic and applied filter display
- * Loosely related to the GetBookingsQueryParams type
- * NOTE: Might not be the best implementation, but I already did it so...
- */
 export interface Filter {
   // key to be used in the query string (GetBookingsQueryParams)
-  key: keyof GetBookingsQueryParams;
+  key: "berth_name" | "ship_name" | "target" | "user_name";
   // value to be used in the query string
   value: string;
   // icon to be displayed in the chip

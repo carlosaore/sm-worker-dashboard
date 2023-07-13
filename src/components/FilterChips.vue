@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Filter, GetBookingsQueryParams } from "@/types";
+import { Filter } from "@/types";
 
 interface Props {
   appliedFilters: Filter[];
@@ -7,7 +7,7 @@ interface Props {
 const props = defineProps<Props>();
 
 const emits = defineEmits<{
-  (event: "remove-filter", key: keyof GetBookingsQueryParams): void;
+  (event: "remove-filter", key: Filter["key"]): void;
 }>();
 </script>
 

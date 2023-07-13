@@ -1,6 +1,6 @@
-import { login } from "./login";
-import { getBookings } from "./getBookings";
-import { getBookingById } from "./getBookingById";
-import { resetPassword } from "./resetPassword";
-
-export { login, getBookings, getBookingById, resetPassword };
+export { getArrivals } from "./getArrivals";
+export { getBookingById } from "./getBookingById";
+export { getDepartures } from "./getDepartures";
+export { getFreeBerths } from "./getFreeBerths";
+export { login } from "./login";
+export { resetPassword } from "./resetPassword";

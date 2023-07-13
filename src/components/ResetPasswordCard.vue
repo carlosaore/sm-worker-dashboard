@@ -42,7 +42,7 @@ const { mutate, isSuccess } = useMutation({
     resetPasswordError.value = {
       isActive: true,
       title: "Error al cambiar la contraseña",
-      message: error.message,
+      message: error instanceof Error ? error.message : "Unknown error",
     };
   },
 });

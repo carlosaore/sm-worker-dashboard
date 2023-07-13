@@ -21,10 +21,16 @@ const workerString = computed(() => {
 <style scoped>
 #footer {
   max-height: 30px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: var(--sm-blue);
+  box-shadow: 0 -2px 2px 0 rgba(0, 0, 0, 0.14), 0 -3px 1px -2px rgba(0, 0, 0, 0.12), 0 -1px 5px 0 rgba(0, 0, 0, 0.2);
 }
 
 .text-footer {
   font-size: 0.7rem;
+  color: white;
   text-align: center;
   width: 100%;
 }

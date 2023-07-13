@@ -7,7 +7,7 @@ import { ref } from "vue";
 const params = useRoute().params;
 
 const { data } = useQuery({
-  queryKey: ["getBookingById", params.id],
+  queryKey: ["getBookingById", params.id as string],
   queryFn: ({ queryKey }) => getBookingById(queryKey[1]),
 });
 
@@ -42,29 +42,21 @@ const documents = ref([
 const onFinish = () => {
   const relevantData = {
     message: "Confirm documents form submitted",
-    bookingId: data.value.data.data.id,
+    bookingId: data.value?.data.data.id,
     paramId: params.id, // should be the same as bookingId (once API is real)
-    shipName: data.value.data.data.ship.name,
-    berthName: data.value.data.data.berth.name,
-    userId: data.value.data.data.user.id,
+    shipName: data.value?.data.data.ship.name,
+    berthName: data.value?.data.data.berth.name,
+    userId: data.value?.data.data.user.uuid,
   };
   console.log(relevantData); // here you can see the data that would be sent to the API
 };
-
 </script>
 
 <template>
   <v-form @submit.prevent="onFinish">
-    <p class="text-caption">
-      Seleccione los documentos que ha revisado y confirme que están en regla.
-    </p>
+    <p class="text-caption">Seleccione los documentos que ha revisado y confirme que están en regla.</p>
     <v-chip-group column multiple active-class="chip-selected">
-      <v-chip
-        v-for="document in documents"
-        :key="document.key"
-        label
-        @click="document.checked = !document.checked"
-      >
+      <v-chip v-for="document in documents" :key="document.key" label @click="document.checked = !document.checked">
         {{ document.name }}
       </v-chip>
     </v-chip-group>

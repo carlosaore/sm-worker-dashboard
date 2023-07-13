@@ -41,7 +41,7 @@ const dateEnd = getDateProps(props.date_end);
 </script>
 
 <template>
-  <v-card>
+  <v-card variant="text">
     <template v-slot:title>
       <span class="text-primary">Detalles de la reserva</span>
     </template>
@@ -91,10 +91,7 @@ const dateEnd = getDateProps(props.date_end);
                 {{ validated ? "Validado" : "No validado" }}
               </p>
               <p class="text-caption">
-                <v-icon
-                  :icon="light ? 'mdi-lightbulb-on' : 'mdi-lightbulb-off'"
-                  :color="light ? SM_INDIGO : 'red'"
-                />
+                <v-icon :icon="light ? 'mdi-lightbulb-on' : 'mdi-lightbulb-off'" :color="light ? SM_INDIGO : 'red'" />
                 Electricidad
               </p>
               <p class="text-caption">

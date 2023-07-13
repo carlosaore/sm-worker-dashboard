@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Filter, GetBookingsQueryParams } from "@/types";
+import { Filter } from "@/types";
 import { onMounted, ref } from "vue";
 
 interface Props {
@@ -9,14 +9,14 @@ interface Props {
 const props = defineProps<Props>();
 
 const emits = defineEmits<{
-  (event: "remove-filter", key: keyof GetBookingsQueryParams): void;
+  (event: "remove-filter", key: Filter["key"]): void;
   (event: "add-filter", filter: Filter): void;
   (event: "update-filters", filters: Filter[]): void;
   (event: "clear-filters"): void;
   (event: "close-dialog"): void;
 }>();
 
-const getFilterValue = (key: keyof GetBookingsQueryParams) => {
+const getFilterValue = (key: Filter["key"]) => {
   const filter = props.appliedFilters.find((f) => f.key === key);
   if (filter) {
     return filter.value;
@@ -38,7 +38,7 @@ onMounted(() => {
 
 const formValid = ref(true); // starts as true because there are no required fields
 
-const formValues = ref<GetBookingsQueryParams>({});
+const formValues = ref<Partial<Record<Filter["key"], string>>>({});
 
 const onFinish = () => {
   if (formValid.value) {

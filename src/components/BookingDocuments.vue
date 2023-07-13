@@ -34,7 +34,7 @@ const onPreview = (key: string) => {
 </script>
 
 <template>
-  <v-card>
+  <v-card variant="text">
     <template v-slot:title>
       <span class="text-primary">Documentos</span>
     </template>

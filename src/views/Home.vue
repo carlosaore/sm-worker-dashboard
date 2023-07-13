@@ -11,12 +11,6 @@ import DailyBrief from "@/views/DailyBrief.vue";
       <v-col cols="12">
         <DailyBrief />
       </v-col>
-      <!--      <v-col cols="12" md="6">
-        <NextArrivals class="mb-6" />
-      </v-col>
-      <v-col cols="12" md="6">
-        <NextDepartures />
-      </v-col>-->
     </v-row>
   </CommonViewWrapper>
 </template>

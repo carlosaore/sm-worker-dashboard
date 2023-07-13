@@ -2,12 +2,13 @@
 import { useRoute } from "vue-router";
 import { useQuery } from "@tanstack/vue-query";
 import { getBookingById } from "@/services";
+import SkeletonLoader from "@/components/SkeletonLoader.vue";
 import { computed, ref } from "vue";
 
 const params = useRoute().params;
 
 const { isSuccess, data, refetch } = useQuery({
-  queryKey: ["getBookingById", params.id],
+  queryKey: ["getBookingById", params.id as string],
   queryFn: ({ queryKey }) => getBookingById(queryKey[1]),
   onSuccess: (data) => {
     if (data.data.data.arrived_at) {
@@ -21,16 +22,18 @@ const { isSuccess, data, refetch } = useQuery({
 
 const hintText = ref("");
 
-const arrivalConfirmed = computed(() => !!(isSuccess.value && data.value.data.data.arrived_at));
+const arrivalConfirmed = computed(() => !!(isSuccess.value && data.value?.data.data.arrived_at));
 
 // TODO: add mutation to confirm arrival to API (and update the loading prop of the button and anything else you need to do)
-const onConfirm = () => {
-  console.log("Confirm arrival", data.value.data.data); // here send the mutation
-  refetch(); // the refetch will update the hintText and arrivalConfirmed computed properties
+const onConfirm = async () => {
+  console.log("Confirm arrival"); // here send the mutation
+  await refetch(); // the refetch will update the hintText and arrivalConfirmed computed properties
+  // close modal
 };
 </script>
 
 <template>
+  <SkeletonLoader v-if="hintText.length === 0" height="100" />
   <p>{{ hintText }}</p>
   <v-btn block class="mt-4" color="primary" :disabled="arrivalConfirmed" @click="onConfirm">Confirmar</v-btn>
 </template>

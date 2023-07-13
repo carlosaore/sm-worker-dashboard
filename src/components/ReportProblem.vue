@@ -9,7 +9,7 @@ const params = useRoute().params;
 const problemDescription = ref("");
 
 const { data } = useQuery({
-  queryKey: ["getBookingById", params.id],
+  queryKey: ["getBookingById", params.id as string],
   queryFn: ({ queryKey }) => getBookingById(queryKey[1]),
   onSuccess: (data) => {
     hintText.value = `Problema con la reserva de ${data.data.data.user.name} ${data.data.data.user.lastname}, embarcación ${data.data.data.ship.name} y amarre ${data.data.data.berth.name}`;
@@ -25,11 +25,11 @@ const onFinish = () => {
   const relevantData = {
     message: "Report problem form submitted",
     problemDescription: problemDescription.value,
-    bookingId: data.value.data.data.id,
+    bookingId: data.value?.data.data.id,
     paramId: params.id, // should be the same as bookingId (once API is real)
-    shipName: data.value.data.data.ship.name,
-    berthName: data.value.data.data.berth.name,
-    userId: data.value.data.data.user.id,
+    shipName: data.value?.data.data.ship.name,
+    berthName: data.value?.data.data.berth.name,
+    userId: data.value?.data.data.user.uuid,
   };
   console.log(relevantData); // here you can see the data that would be sent to the API
   hintText.value = "Gracias por reportar el problema"; // move this to the onSuccess callback of the mutation
