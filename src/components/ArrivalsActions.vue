@@ -36,7 +36,6 @@ import ConfirmDocuments from "@/components/ConfirmDocuments.vue";
             buttonText="Reportar problema"
             buttonVariant="text"
             buttonColor="warning"
-            buttonIcon="warning"
             title="Reportar problema"
             allowFullscreen
           >

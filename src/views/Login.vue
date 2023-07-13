@@ -35,7 +35,7 @@ const { isLoading, mutateAsync } = useMutation({
     loginError.value = {
       isActive: true,
       title: "Error al iniciar sesión",
-      message: error.message,
+      message: error instanceof Error ? error.message : "Unknown error",
     };
   },
 });

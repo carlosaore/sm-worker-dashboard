@@ -4,16 +4,11 @@ interface Props {
   buttonText: string;
   buttonColor?: "primary" | "secondary" | "success" | "info" | "warning" | "error";
   buttonVariant: "text" | "flat" | "elevated" | "tonal" | "outlined" | "plain";
-  buttonIcon?: "warning";
   title?: string;
   allowFullscreen: boolean;
 }
 
 const props = defineProps<Props>();
-
-const icon = {
-  warning: "mdi-alert-circle",
-}[props.buttonIcon || ""];
 
 const dialogActive = ref(false);
 
@@ -34,7 +29,7 @@ const closeDialog = () => {
     block
     :color="props.buttonColor ? props.buttonColor : ''"
     :variant="props.buttonVariant"
-    :prepend-icon="buttonIcon ? icon : ''"
+    prepend-icon="mdi-alert-circle"
   >
     {{ props.buttonText }}
     <v-dialog

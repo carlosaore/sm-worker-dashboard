@@ -81,7 +81,6 @@ const onPreview = (key: string) => {
             buttonText="Reportar problema"
             buttonVariant="text"
             buttonColor="warning"
-            buttonIcon="warning"
             title="Reportar problema"
             allowFullscreen
           >
